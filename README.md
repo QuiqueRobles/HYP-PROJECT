@@ -7,7 +7,7 @@ Welcome to the repository of the Women's Support Center project! This repository
 - Enrique Robles Uriel
 - Lucia Chan Cameno
 - Andrés Díaz Ruano
-- Lucia Cubero
+- Lucia Cubero Aranda
 
 ## Project Description
 
