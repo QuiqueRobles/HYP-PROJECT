@@ -4,7 +4,6 @@
       <swiper-slide v-for="(image, index) in images" :key="index">
         <img :src="image" alt="Carousel Image" class="carousel-image">
       </swiper-slide>
-      <div class="swiper-pagination"></div>
     </swiper>
   </div>
 </template>
@@ -26,12 +25,17 @@ export default {
           disableOnInteraction: false
         },
         pagination: {
-          el: '.swiper-pagination',
-          clickable: true // Permite hacer clic en la paginación para navegar
+          el: '.swiper-pagination'
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         }
       },
       images: [
-        require('@/public/logo.png') // Ruta de tu imagen logo.png
+        'logo.png', // Ruta de tus imágenes
+        'logo.png',
+        'logo.png'
       ]
     }
   }
@@ -45,11 +49,7 @@ export default {
 }
 
 .carousel-image {
-  width: 100%; /* Opcional: ajusta el ancho al 100% del contenedor */
+  width: 200px; /* Ancho fijo para las imágenes */
   height: auto; /* Altura automática para mantener la proporción */
-}
-
-.swiper-pagination {
-  bottom: 10px; /* Posiciona la paginación en la parte inferior */
 }
 </style>
