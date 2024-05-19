@@ -16,7 +16,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  plugins: [],
+  plugins: ['~/plugins/bootstrap-vue.js'],
   components: true,
   buildModules: [],
   modules: [],
