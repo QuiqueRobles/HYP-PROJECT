@@ -90,7 +90,6 @@
             <button class="carousel-button next">❯</button>
           </section>
         </main>
-        <script src="script.js"></script>
         </body>
       </section>
 
@@ -113,7 +112,12 @@
       <section>
         <h2>Location</h2>
         <p>You can find us in Milan, at Via Roma, 123. Our center is conveniently located to ensure accessibility for all who seek our help.</p>
+
       </section>
+
+
+
+q
 
       <section>
         <h2>Opening Hours</h2>
