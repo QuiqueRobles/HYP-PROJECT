@@ -116,9 +116,6 @@
       </section>
 
 
-
-q
-
       <section>
         <h2>Opening Hours</h2>
         <p>We are open every day from 9:00 AM to 9:00 PM. We welcome you to visit us during these hours to receive support, guidance, and assistance.</p>
