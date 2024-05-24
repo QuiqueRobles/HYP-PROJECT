@@ -2,10 +2,11 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img class="logo" src="@/public/logo.png" alt="Logo">
-        </a>
-        <div class="navbar-burger" @click="toggleMenu" :class="{'is-active': isActive}">
+        <nuxt-link class="navbar-item" to="/">
+          <img class="logo" src="@/assets/logo.png" alt="Logo">
+          <span class="navbar-title">Anti-Violence Centers</span>
+        </nuxt-link>
+        <div class="navbar-burger" @click="toggleMenu" :class="{'is-active': isActive}" aria-expanded="isActive" aria-label="menu">
           <span></span>
           <span></span>
           <span></span>
@@ -15,10 +16,10 @@
       <div :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-end">
           <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
-          <nuxt-link class="navbar-item" to="/about">Who We Are</nuxt-link>
-          <nuxt-link class="navbar-item" to="/services">Our Activities</nuxt-link>
-          <nuxt-link class="navbar-item" to="/support">Support Us</nuxt-link>
-          <nuxt-link class="navbar-item" to="/contact">Contacts</nuxt-link>
+          <nuxt-link class="navbar-item" to="/about">Who we are</nuxt-link>
+          <nuxt-link class="navbar-item" to="/services">Services</nuxt-link>
+          <nuxt-link class="navbar-item" to="/support">Support</nuxt-link>
+          <nuxt-link class="navbar-item" to="/contact">Contact</nuxt-link>
         </div>
       </div>
     </div>
@@ -46,6 +47,14 @@ export default {
   background-color: #ff5ba2;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar-brand {
@@ -54,10 +63,36 @@ export default {
 }
 
 .navbar-burger {
-  display: flex;
+  display: none;
+  cursor: pointer;
 }
 
-@media (max-width: 768px) {
+.navbar-burger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s;
+}
+
+.navbar-burger.is-active span:nth-child(1) {
+  transform: rotate(45deg);
+  position: relative;
+  top: 8px;
+}
+
+.navbar-burger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-burger.is-active span:nth-child(3) {
+  transform: rotate(-45deg);
+  position: relative;
+  top: -8px;
+}
+
+@media (max-width: 1024px) {
   .navbar-burger {
     display: block;
   }
@@ -67,40 +102,82 @@ export default {
   }
 
   .navbar-menu.is-active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .navbar-end {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .navbar-item {
     margin-bottom: 0.5rem;
+    width: 100%;
+    text-align: center;
   }
 }
 
-.navbar-menu {
-  flex-grow: 1;
-  justify-content: flex-end;
-  align-items: center;
-  display: flex;
+@media (min-width: 1024px) {
+  .navbar-menu {
+    display: flex !important;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+
+  .navbar-end {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-item {
+    margin-right: 1rem;
+  }
 }
 
 .navbar-item {
   color: white;
   font-weight: bold;
-  margin-right: 1rem; /* Ajusta el espacio entre los elementos según sea necesario */
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.navbar-item:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #ffd1e8;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .navbar-item:hover {
   color: #ffd1e8;
+  transform: scale(1.05);
+}
+
+.navbar-item:hover:after {
+  width: 100%;
 }
 
 .logo {
-  max-height: 3rem; /* Ajusta este valor según sea necesario */
-  margin-right: auto;
+  max-height: 3rem;
+  margin-right: 1rem;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
 }
 
 .is-active {

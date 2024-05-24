@@ -1,64 +1,154 @@
 <template>
   <div class="container">
     <h1>Our Activities</h1>
-    <p>Details about the services and activities offered.</p>
+    <p class="subtitle">Discover the diverse range of services and activities we offer to support women in need.</p>
 
-    <section>
-      <h2>Counseling Services</h2>
-      <p>We offer individual and group counseling sessions to help women process their experiences and develop coping strategies. Our professional counselors are trained to provide support for a range of issues, including trauma, anxiety, and depression.</p>
-    </section>
+    <AccordionComponent :items="activities" />
 
-    <section>
-      <h2>Legal Assistance</h2>
-      <p>Our legal team provides guidance and support for women navigating the legal system. This includes assistance with restraining orders, divorce proceedings, custody battles, and other legal matters related to gender violence.</p>
-    </section>
+    <div class="call-to-action">
+      <h2>Ready to Get Help?</h2>
+      <p>If you or someone you know is experiencing domestic violence, reach out to us for support.</p>
+      <router-link to="/contact" class="cta-button">Contact Us</router-link>
+    </div>
 
-    <section>
-      <h2>Emergency Shelter</h2>
-      <p>We provide a safe and secure place for women and their children who need immediate protection from violence. Our shelter offers a supportive environment where women can begin to heal and plan their next steps.</p>
-    </section>
-
-    <section>
-      <h2>Support Groups</h2>
-      <p>Our support groups offer a space for women to share their experiences and receive emotional support from others who have faced similar challenges. These groups are facilitated by trained professionals and focus on empowerment and mutual aid.</p>
-    </section>
-
-    <section>
-      <h2>Educational Workshops</h2>
-      <p>We conduct workshops on a variety of topics, including self-defense, financial independence, and healthy relationships. These workshops are designed to equip women with the skills and knowledge they need to rebuild their lives.</p>
-    </section>
-
-    <section>
-      <h2>Childcare Services</h2>
-      <p>To support mothers who are seeking our services, we offer on-site childcare. This allows women to focus on their healing and participate in our programs without worrying about the safety and well-being of their children.</p>
-    </section>
-
-    <section>
-      <h2>Job Training and Placement</h2>
-      <p>We provide job training programs to help women develop new skills and increase their employability. Our job placement services assist women in finding stable employment, fostering economic independence and stability.</p>
-    </section>
-
-    <section>
-      <h2>Health Services</h2>
-      <p>Our center offers health services, including routine check-ups, mental health evaluations, and referrals to specialized medical care. We prioritize the physical and mental well-being of all the women we support.</p>
-    </section>
-
-    <section>
-      <h2>Outreach and Advocacy</h2>
-      <p>We engage in outreach activities to raise awareness about gender violence and advocate for policies that protect and empower women. Our team works with community leaders, lawmakers, and other organizations to drive change and support survivors.</p>
-    </section>
-    
+    <FeedbackForm />
   </div>
 </template>
 
 <script>
+import AccordionComponent from '@/components/AccordionComponent.vue';
+import FeedbackForm from '@/components/FeedbackForm.vue';
+
 export default {
-  name: 'ServicesPage'
+  name: 'ServicesPage',
+  components: {
+    AccordionComponent,
+    FeedbackForm
+  },
+  data() {
+    return {
+      activities: [
+        {
+          title: 'Counseling Services',
+          content: 'We offer individual and group counseling sessions to help women process their experiences and develop coping strategies.'
+        },
+        {
+          title: 'Legal Assistance',
+          content: 'Our legal team provides guidance and support for women navigating the legal system.'
+        },
+        {
+          title: 'Emergency Shelter',
+          content: 'We provide a safe and secure place for women and their children who need immediate protection from violence.'
+        },
+        {
+          title: 'Support Groups',
+          content: 'Our support groups offer a space for women to share their experiences and receive emotional support.'
+        },
+        {
+          title: 'Educational Workshops',
+          content: 'We conduct workshops on a variety of topics, including self-defense, financial independence, and healthy relationships.'
+        },
+        {
+          title: 'Childcare Services',
+          content: 'To support mothers who are seeking our services, we offer on-site childcare.'
+        },
+        {
+          title: 'Job Training and Placement',
+          content: 'We provide job training programs to help women develop new skills and increase their employability.'
+        },
+        {
+          title: 'Health Services',
+          content: 'Our center offers health services, including routine check-ups, mental health evaluations, and referrals to specialized medical care.'
+        },
+        {
+          title: 'Outreach and Advocacy',
+          content: 'We engage in outreach activities to raise awareness about gender violence and advocate for policies that protect and empower women.'
+        }
+      ]
+    };
+  }
 }
 </script>
 
 <style scoped>
 .container {
   padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #6a0dad;
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.call-to-action {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action h2 {
+  color: #6a0dad;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #6a0dad;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-size: 1.2rem;
+}
+
+.cta-button:hover {
+  background-color: #550099;
+}
+
+/* Styling for accordion */
+.accordion-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  text-align: center; /* Centering titles */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.4rem;
+}
+
+.accordion-button:hover {
+  background-color: #550099;
+}
+
+.accordion-content {
+  padding: 1rem;
+  background-color: #fff;
+  font-size: 1.3rem;
 }
 </style>

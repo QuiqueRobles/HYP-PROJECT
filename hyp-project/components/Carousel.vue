@@ -2,14 +2,19 @@
   <div class="carousel-container">
     <swiper :options="swiperOptions">
       <swiper-slide v-for="(image, index) in images" :key="index">
-        <img :src="image" alt="Carousel Image" class="carousel-image">
+        <img :src="(`@/public/${image}`)" alt="Carousel Image" class="carousel-image">
       </swiper-slide>
+      <!-- Add pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add navigation buttons -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </swiper>
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
 export default {
   components: {
@@ -33,13 +38,13 @@ export default {
         }
       },
       images: [
-        'logo.png', // Ruta de tus imágenes
+        'logo.png', // Replace with actual image paths
         'logo.png',
         'logo.png'
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>
@@ -49,7 +54,7 @@ export default {
 }
 
 .carousel-image {
-  width: 200px; /* Ancho fijo para las imágenes */
-  height: auto; /* Altura automática para mantener la proporción */
+  width: 100%; /* Adjust image width as needed */
+  height: auto; /* Maintain aspect ratio */
 }
 </style>
