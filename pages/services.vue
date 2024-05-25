@@ -18,6 +18,8 @@
 <script>
 import AccordionComponent from '@/components/AccordionComponent.vue';
 import FeedbackForm from '@/components/FeedbackForm.vue';
+import { useServicesStore } from '~/stores/services';
+import { usePeopleStore } from '~/stores/people';
 
 export default {
   name: 'ServicesPage',
@@ -25,47 +27,20 @@ export default {
     AccordionComponent,
     FeedbackForm
   },
-  data() {
-    return {
-      activities: [
-        {
-          title: 'Counseling Services',
-          content: 'We offer individual and group counseling sessions to help women process their experiences and develop coping strategies.'
-        },
-        {
-          title: 'Legal Assistance',
-          content: 'Our legal team provides guidance and support for women navigating the legal system.'
-        },
-        {
-          title: 'Emergency Shelter',
-          content: 'We provide a safe and secure place for women and their children who need immediate protection from violence.'
-        },
-        {
-          title: 'Support Groups',
-          content: 'Our support groups offer a space for women to share their experiences and receive emotional support.'
-        },
-        {
-          title: 'Educational Workshops',
-          content: 'We conduct workshops on a variety of topics, including self-defense, financial independence, and healthy relationships.'
-        },
-        {
-          title: 'Childcare Services',
-          content: 'To support mothers who are seeking our services, we offer on-site childcare.'
-        },
-        {
-          title: 'Job Training and Placement',
-          content: 'We provide job training programs to help women develop new skills and increase their employability.'
-        },
-        {
-          title: 'Health Services',
-          content: 'Our center offers health services, including routine check-ups, mental health evaluations, and referrals to specialized medical care.'
-        },
-        {
-          title: 'Outreach and Advocacy',
-          content: 'We engage in outreach activities to raise awareness about gender violence and advocate for policies that protect and empower women.'
-        }
-      ]
-    };
+  setup() {
+    const servicesStore = useServicesStore();
+    const peopleStore = usePeopleStore();
+
+    const activities = computed(() => servicesStore.services.map(service => {
+      const responsiblePerson = peopleStore.people.find(person => person.id === service.responsible_person_id);
+      return {
+        title: service.title,
+        content: service.description,
+        responsiblePerson
+      };
+    }));
+
+    return { activities };
   }
 }
 </script>
@@ -150,5 +125,25 @@ h1 {
   padding: 1rem;
   background-color: #fff;
   font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.responsible-person {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.responsible-person img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.responsible-person-info {
+  font-size: 1.2rem;
+  color: #333;
 }
 </style>
