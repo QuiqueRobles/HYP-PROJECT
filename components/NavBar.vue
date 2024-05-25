@@ -20,6 +20,7 @@
           <nuxt-link class="navbar-item" to="/services">Services</nuxt-link>
           <nuxt-link class="navbar-item" to="/support">Support</nuxt-link>
           <nuxt-link class="navbar-item" to="/contact">Contact</nuxt-link>
+          <nuxt-link class="navbar-item" to="/people">People</nuxt-link>
         </div>
       </div>
     </div>
