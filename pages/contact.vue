@@ -51,7 +51,7 @@
         <p class="contact-label">
           <span class="icon">✉️</span> Email:
         </p>
-        <p class="contact-detail"><a href="mailto:anti_violence@example.com">anti_violence@example.com</a></p>
+        <p class="contact-detail"><a href="mailto:anti_violence@gmail.com">anti_violence@gmail.com</a></p>
       </div>
     </div>
 
