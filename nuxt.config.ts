@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     }
   },
   css: ['@/assets/styles/main.css'],
-  modules: ['@pinia/nuxt', 'vuetify-nuxt-module', 'usebootstrap'],
+  modules: ['@pinia/nuxt', 'vuetify-nuxt-module', 'usebootstrap', '@vesp/nuxt-fontawesome'],
   components: true,
   pinia: {
     storesDirs: [

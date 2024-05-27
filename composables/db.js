@@ -1,9 +1,10 @@
 import { DataTypes, Sequelize } from "sequelize";
-import { join } from "path";
-
+import path from "path";
+const basePath = process.cwd();
+const dbPath = path.join(basePath, 'database.db');
 const db = new Sequelize({
   dialect: 'sqlite',
-  storage: join('C:', 'Users', 'qrobl', 'OneDrive - Fundación Universitaria San Pablo CEU', 'Escritorio', 'QUIQUE', 'CEU', 'Quinto', 'Secondo Cuatrimestre', 'Hypermedia Applications', 'HYP-PROJECT', 'database.db')
+  storage: dbPath
 });
 
 await db.authenticate();
