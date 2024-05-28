@@ -3,7 +3,12 @@
     <HeroBanner />
     <div class="container">
       <main>
-        <!-- <Carousel /> -->
+        <section class="intro-section">
+          <h1>AGAINST WOMEN'S VIOLENCE </h1>
+          <p>The National Anti-violence Network run by women's organizations</p>
+        </section>
+        <Valores />
+
         <section class="centers-section">
           <h2>Anti-Violence Centers</h2>
           <div class="center-list">
@@ -20,11 +25,13 @@
 <script>
 import HeroBanner from '@/components/HeroBanner.vue'
 import CenterCard from '@/components/CenterCard.vue'
+import Valores from '@/components/Valores.vue'
 
 export default {
   components: {
     HeroBanner,
-    CenterCard
+    CenterCard,
+    Valores
   },
   data() {
     return {
@@ -72,18 +79,37 @@ export default {
   padding: 20px;
 }
 
+/* Estilos para la sección de introducción */
+.intro-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.intro-section h1 {
+  font-size: 36px;
+  color: #4a148c;
+}
+
+.intro-section p {
+  font-size: 18px;
+  color: #555;
+}
 /* Estilos para la sección de los centros */
 .centers-section {
   padding: 50px 20px;
-  background-color: #f9f9f9;
+  background-color: #f4f0f8;
   border-radius: 8px;
+  background-image: url('assets/styles/fondo.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .centers-section h2 {
   font-size: 32px;
-  color: #333;
+  color: #4a148c;
   margin-bottom: 30px;
   text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .center-list {
@@ -99,30 +125,59 @@ export default {
   display: flex;
   justify-content: center;
   max-width: 400px;
-}
-
-@media (max-width: 1024px) {
-  .center-card-wrapper {
-    flex: 1 1 calc(50% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .center-card-wrapper {
-    flex: 1 1 100%;
-  }
-}
-
-/* Estilos adicionales para mejorar la apariencia */
-.center-card-wrapper {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  position: relative;
 }
 
 .center-card-wrapper:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+.center-card-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.center-card-wrapper:hover::before {
+  opacity: 1;
+}
+
+.center-card-wrapper h3 {
+  font-size: 24px;
+  color: #4a148c;
+  margin-bottom: 15px;
+}
+
+.center-card-wrapper p {
+  font-size: 16px;
+  color: #555;
+}
+
+.center-card-wrapper a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #4a148c;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.center-card-wrapper a:hover {
+  background-color: #7b1fa2;
+}
 </style>
+

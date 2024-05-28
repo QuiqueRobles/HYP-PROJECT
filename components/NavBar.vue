@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: #ff5ba2;
+  background-color: #6a1b9a;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
