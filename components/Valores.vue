@@ -1,10 +1,12 @@
 <template>
   <div class="valores-section">
-    <h2>Our Values</h2>
-    <div class="value-card">
-      <transition name="fade">
-        <p :key="currentValueIndex">{{ values[currentValueIndex] }}</p>
-      </transition>
+    <h3>WOMEN AGAINST VIOLENCE </h3>
+    <p>The National Anti-violence Network run by women's organizations</p>
+    <div class="valores-container">
+      <div class="valor-card" v-for="valor in valores" :key="valor.label">
+        <span class="valor-numero">{{ valor.numero }}</span>
+        <span class="valor-label">{{ valor.label }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -13,31 +15,27 @@
 export default {
   data() {
     return {
-      values: [
-        "Support and Solidarity",
-        "Empowerment of Women",
-        "Confidentiality and Respect",
-        "Legal Assistance",
-        "Psychological Support",
-        "24/7 Helpline",
-        "Safe Shelter",
-        "Educational Programs"
-      ],
-      currentValueIndex: 0,
-      intervalId: null
+      valores: [
+        { label: "Anti-violence centers", numero: 87 },
+        { label: "Women listened to in a year", numero: 106 },
+        { label: "Activists", numero: 200 },
+        { label: "Refuge houses", numero: 2874 },
+        { label: "Hotlines", numero: 62 }
+      ]
     };
   },
   mounted() {
-    this.startValueRotation();
-  },
-  beforeDestroy() {
-    clearInterval(this.intervalId);
+    this.incrementActivists();
   },
   methods: {
-    startValueRotation() {
-      this.intervalId = setInterval(() => {
-        this.currentValueIndex = (this.currentValueIndex + 1) % this.values.length;
-      }, 3000);
+    incrementActivists() {
+      setInterval(() => {
+        const randomIncrement = Math.floor(Math.random() * 2) + 1;
+        const activistsIndex = this.valores.findIndex(valor => valor.label === "Activists");
+        if (activistsIndex !== -1) {
+          this.valores[activistsIndex].numero += randomIncrement;
+        }
+      }, 1800);
     }
   }
 };
@@ -45,33 +43,55 @@ export default {
 
 <style scoped>
 .valores-section {
-  padding: 50px 20px;
-  background-color: #e7daf3;
-  border-radius: 8px;
+  padding: 40px 20px;
+  background-color: #f4f0f8;
   text-align: center;
+  border-radius: 8px;
+  color: #4a148c;
 }
 
-.valores-section h2 {
-  font-size: 32px;
-  color: #34167a;
-  margin-bottom: 20px;
+.valores-section h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
-.value-card {
-  background-color: #ffffff;
-  border: 2px solid #502a96;
+.valores-section p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.valores-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.valor-card {
+  background-color: #fff;
+  border: 2px solid #4a148c;
   border-radius: 8px;
   padding: 20px;
-  font-size: 20px;
-  color: #502a96;
-  transition: all 0.5s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
+.valor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
+
+.valor-numero {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #7b1fa2;
+}
+
+.valor-label {
+  font-size: 16px;
+  color: #4a148c;
 }
 </style>
