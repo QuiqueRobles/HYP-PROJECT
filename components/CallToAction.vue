@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .call-to-action {
-  background-color: #ffd1e8;
+  background-color: #e7daf3;
   padding: 4rem 2rem;
   text-align: center;
   border-radius: 8px;
