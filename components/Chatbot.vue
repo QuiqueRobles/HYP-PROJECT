@@ -5,9 +5,9 @@
     </div>
     <transition name="slide-fade">
       <div v-if="isOpen" class="chatbot">
-        <div style="background-color: #8e25ae;"class="chat-header">
+        <div style="background-color: #8e25ae;" class="chat-header">
           <button class="close-button" @click="toggleChatbot">X</button>
-          We are here to support women 
+          We are here to support women
         </div>
         <div class="chat-container" ref="chatContainer">
           <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUser, 'bot-message': !message.isUser }">
@@ -16,20 +16,20 @@
         </div>
         <div class="input-container">
           <input v-model="inputText" @keyup.enter="sendMessage" type="text" placeholder="Type your message...">
-          <button style="background-color: #8e25ae;"@click="sendMessage">Send</button>
+          <button style="background-color: #8e25ae;" @click="sendMessage">Send</button>
         </div>
       </div>
     </transition>
   </div>
 </template>
+
 <script>
 export default {
-  name: 'Chatbot',
   data() {
     return {
-      messages: [],
+      isOpen: false,
       inputText: '',
-      isOpen: false // Estado para controlar si el chatbot está abierto o cerrado
+      messages: []
     };
   },
   methods: {
@@ -37,45 +37,47 @@ export default {
       this.isOpen = !this.isOpen;
     },
     async sendMessage() {
-      if (!this.inputText.trim()) return;
+      if (this.inputText.trim() === '') return;
 
-      this.messages.push({
-        text: this.inputText,
-        isUser: true
-      });
-
-      await this.getBotResponse(this.inputText.trim());
-
+      // Add user's message to the chat
+      this.messages.push({ text: this.inputText, isUser: true });
+      const userMessage = this.inputText;
       this.inputText = '';
 
-      // Scroll al final del chat después de enviar un mensaje
-      this.$refs.chatContainer.scrollTop = this.$refs.chatContainer.scrollHeight;
-    },
-    async getBotResponse(inputText) {
+      // Scroll to the bottom of the chat container
+      this.$nextTick(() => {
+        const chatContainer = this.$refs.chatContainer;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      });
+
       try {
-        const response = await fetch('https://api.openai.com/v1/completions', {
+        // Send the user's message to the OpenAI API
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer PUT_KEY_HERE' // Reemplaza con tu clave de API de OpenAI
+            'Authorization': `Bearer PUT_KEY` // Reemplaza con tu clave API
           },
           body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
-            prompt: inputText,
-            max_tokens: 150
+            model: "gpt-4",
+            messages: [{ role: 'user', content: userMessage }]
           })
         });
+
         const data = await response.json();
-        if (data && data.choices && data.choices.length > 0) {
-          this.messages.push({
-            text: data.choices[0].text.trim(),
-            isUser: false
-          });
-        } else {
-          console.error('No response from OpenAI API');
-        }
+        const botMessage = data.choices[0].message.content;
+
+        // Add bot's response to the chat
+        this.messages.push({ text: botMessage, isUser: false });
+
+        // Scroll to the bottom of the chat container
+        this.$nextTick(() => {
+          const chatContainer = this.$refs.chatContainer;
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
       } catch (error) {
-        console.error('Error fetching response:', error);
+        console.error('Error:', error);
+        this.messages.push({ text: 'Sorry, something went wrong. Please try again later.', isUser: false });
       }
     }
   }
@@ -83,114 +85,76 @@ export default {
 </script>
 
 <style scoped>
+.chatbot-tab {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: #8e25ae;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .chatbot {
   position: fixed;
-  bottom: 30px;
+  bottom: 0;
   right: 0;
   width: 300px;
+  height: 400px;
+  background-color: white;
   border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px;
-  background-color: #ddb9db;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border-bottom: 1px solid #ccc;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2em;
-  cursor: pointer;
-  background-color: #693bb8;
+  text-align: center;
+  font-weight: bold;
+  color: white;
 }
 
 .chat-container {
+  flex: 1;
   padding: 10px;
-  height: 200px;
-  overflow-y: scroll;
-}
-
-.message {
-  padding: 8px 12px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-}
-
-.user-message {
-  background-color: #f0f0f0;
-  text-align: right;
-}
-
-.bot-message {
-  background-color: #8e25ae;
-  color: #fff;
+  overflow-y: auto;
 }
 
 .input-container {
   display: flex;
-  align-items: center;
   padding: 10px;
+  border-top: 1px solid #ccc;
 }
 
-.input-container input {
+input {
   flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
+  padding: 5px;
 }
 
-.input-container button {
-  padding: 8px 16px;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
+button {
+  padding: 5px 10px;
 }
 
-.input-container button:hover {
-  background-color: #0056b3;
+.message {
+  margin: 5px 0;
 }
 
-.chatbot-tab {
-  position: fixed;
-  bottom: 20px;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  background-color: #451687;
-  color: #fff;
-  border-radius: 5px 0 0 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.user-message {
+  text-align: right;
+  color: blue;
 }
 
-.chatbot-tab:hover {
-  background-color: #0056b3;
+.bot-message {
+  text-align: left;
+  color: green;
 }
 
-/* Transition styles */
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: opacity 0.5s;
 }
 
 .slide-fade-enter, .slide-fade-leave-to {
   opacity: 0;
-  transform: translateX(20px);
 }
 </style>
-
-
