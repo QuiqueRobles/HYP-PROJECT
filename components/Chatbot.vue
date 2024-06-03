@@ -5,7 +5,7 @@
     </div>
     <transition name="slide-fade">
       <div v-if="isOpen" class="chatbot">
-        <div style="background-color: #8e25ae;" class="chat-header">
+        <div class="chat-header">
           <button class="close-button" @click="toggleChatbot">X</button>
           We are here to support women
         </div>
@@ -16,7 +16,7 @@
         </div>
         <div class="input-container">
           <input v-model="inputText" @keyup.enter="sendMessage" type="text" placeholder="Type your message...">
-          <button style="background-color: #8e25ae;" @click="sendMessage">Send</button>
+          <button @click="sendMessage">Send</button>
         </div>
       </div>
     </transition>
@@ -56,7 +56,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer PUT_KEY` // Reemplaza con tu clave API
+            'Authorization': `Bearer PUT_YOUR_KEY_HERE` // Reemplaza con tu clave API
           },
           body: JSON.stringify({
             model: "gpt-4",
@@ -93,18 +93,21 @@ export default {
   color: white;
   padding: 10px;
   cursor: pointer;
+  z-index: 1000; /* Ensure it's on top */
 }
 
 .chatbot {
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 300px;
-  height: 400px;
+  width: 350px; /* Increased width */
+  height: 500px; /* Increased height */
   background-color: white;
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow for better visibility */
+  z-index: 1000; /* Ensure it's on top */
 }
 
 .chat-header {
@@ -112,41 +115,69 @@ export default {
   text-align: center;
   font-weight: bold;
   color: white;
+  background-color: #8e25ae; /* Moved color to CSS */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .chat-container {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+  background-color: #f9f9f9; /* Light background for better contrast */
 }
 
 .input-container {
   display: flex;
   padding: 10px;
   border-top: 1px solid #ccc;
+  background-color: #fff; /* Ensure background is white */
 }
 
 input {
   flex: 1;
-  padding: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
 }
 
 button {
-  padding: 5px 10px;
+  padding: 10px 15px;
+  background-color: #8e25ae; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .message {
   margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 80%;
+  word-wrap: break-word;
 }
 
 .user-message {
-  text-align: right;
-  color: blue;
+  align-self: flex-end;
+  background-color: #e0e0e0; /* Light gray background for user message */
+  color: black;
 }
 
 .bot-message {
-  text-align: left;
-  color: green;
+  align-self: flex-start;
+  background-color: #d1c4e9; /* Light purple background for bot message */
+  color: black;
 }
 
 .slide-fade-enter-active,
@@ -158,3 +189,5 @@ button {
   opacity: 0;
 }
 </style>
+
+
