@@ -47,7 +47,7 @@ export default {
   components: {
     ImageSlider,
     Map,
-     Calendar
+    Calendar
   }
 }
 </script>
