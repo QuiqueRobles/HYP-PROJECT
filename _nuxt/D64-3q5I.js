@@ -1,1 +1,0 @@
-import{A as r,r as a}from"./CGeqU_Dw.js";import{u as n}from"./CleF5PlO.js";const p=r("services",()=>{const s=a([]);async function t(e){const o=JSON.stringify(e);(await fetch("/api/services",{method:"POST",body:o})).ok&&s.value.push(e)}async function i(){const{data:e}=await n("/api/services","$B8uBUVX0sx");s.value=e.value||[]}return i(),{services:s,addService:t}});export{p as u};
