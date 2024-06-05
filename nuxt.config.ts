@@ -21,8 +21,5 @@ export default defineNuxtConfig({
     storesDirs: [
         './stores/**'
     ]
-  },
-  router: {
-    base: '/HYP-PROJECT/'
   }
 })
