@@ -1,0 +1,1 @@
+import{A as r,r as a}from"./CZihCunZ.js";import{u as n}from"./BeZEj2xh.js";const p=r("services",()=>{const s=a([]);async function t(e){const o=JSON.stringify(e);(await fetch("/api/services",{method:"POST",body:o})).ok&&s.value.push(e)}async function i(){const{data:e}=await n("/api/services","$B8uBUVX0sx");s.value=e.value||[]}return i(),{services:s,addService:t}});export{p as u};
