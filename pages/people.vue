@@ -12,7 +12,7 @@
             <h3> <br> Responsibilities</h3>
             <ul v-if="getServices(person.id).length">
               <li v-for="service in getServices(person.id)" :key="service.id">
-                <nuxt-link class="link-item" to="/services"> {{ service.title }} </nuxt-link>
+                <nuxt-link class="link-item" :to="{ path: '/services', query: { index: service.id - 1} }">{{ service.title }}</nuxt-link>
               </li>
             </ul>
             <ul v-if="getProjects(person.id).length">
