@@ -6,6 +6,16 @@
       </button>
       <div v-if="activeIndex === index" class="accordion-content">
         {{ item.content }}
+        <hr>
+        <p> <br> Responsible person:</p>
+
+        <div class="responsible-person">
+          <img :src="item.image" alt="image" class="responsible-image" />
+          <div class="responsible-name">
+            <p>{{ item.responsible }}</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -24,11 +34,22 @@ export default {
       activeIndex: null
     };
   },
+
+  created() {
+    // Retrieve index from query parameter
+    const queryIndex = parseInt(this.$route.query.index);
+    if (!isNaN(queryIndex)) {
+      // Set active index based on query parameter
+      this.activeIndex = queryIndex;
+    }
+  },
+
   methods: {
     toggleAccordion(index) {
       this.activeIndex = this.activeIndex === index ? null : index;
     }
   }
+
 }
 </script>
 
@@ -63,4 +84,23 @@ export default {
   background-color: #fff;
   font-size: 1.3rem;
 }
+
+.responsible-person {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+.responsible-image {
+  width: 50px; /* Tamaño reducido de la imagen */
+  height: auto;
+  margin-right: 10px; /* Espacio entre la imagen y el nombre */
+  border-radius: 50%;
+}
+
+.responsible-name {
+  flex-grow: 1; /* Permite que el texto se expanda para ocupar todo el espacio restante */
+  margin-right: 20px;
+}
+
 </style>
