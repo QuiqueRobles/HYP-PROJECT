@@ -7,6 +7,21 @@
         <div class="person-details">
           <h2>{{ person.name }}</h2>
           <p>{{ person.cv }}</p>
+
+          <div v-if="getServices(person.id).length || getProjects(person.id).length"> 
+            <h3> <br> Responsibilities</h3>
+            <ul v-if="getServices(person.id).length">
+              <li v-for="service in getServices(person.id)" :key="service.id">
+                <nuxt-link class="link-item" to="/services"> {{ service.title }} </nuxt-link>
+              </li>
+            </ul>
+            <ul v-if="getProjects(person.id).length">
+              <li v-for="project in getProjects(person.id)" :key="project.id">
+                <nuxt-link class="link-item" to="/projects"> {{ project.title }} </nuxt-link>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </li>
     </ul>
@@ -25,8 +40,12 @@
 <script setup>
 import { ref } from 'vue';
 import { usePeopleStore } from '~/stores/people';
+import { useServicesStore } from '~/stores/services';
+import { useProjectsStore } from '~/stores/projects';
 
 const store = usePeopleStore();
+const servicesStore = useServicesStore();
+const projectsStore = useProjectsStore();
 const people = store.people;
 const newPerson = ref({ name: '', picture_url: '', cv: '' });
 
@@ -34,6 +53,25 @@ function addNewPerson() {
   store.addPerson({ ...newPerson.value });
   newPerson.value = { name: '', picture_url: '', cv: '' };
 }
+
+function getServices(personId){
+  return servicesStore.services.reduce((acc, service) => {
+    if (service.responsible_person_id === personId) {
+        acc.push(service);
+    }
+    return acc;
+}, []);
+}
+
+function getProjects(personId){
+  return projectsStore.projects.reduce((acc, project) => {
+    if (project.responsible_person_id === personId) {
+        acc.push(project);
+    }
+    return acc;
+}, []);
+}
+
 </script>
 
 <style scoped>
@@ -89,4 +127,15 @@ function addNewPerson() {
 .submit-button:hover {
   background-color: #0056b3;
 }
+
+.link-item {
+  color: rgb(57, 147, 178);
+  text-decoration: none;
+}
+
+.link-item:hover {
+  color:#6a1b9a;
+  text-decoration: underline;
+}
+
 </style>
