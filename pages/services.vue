@@ -32,11 +32,12 @@ export default {
     const peopleStore = usePeopleStore();
 
     const activities = computed(() => servicesStore.services.map(service => {
-      const responsiblePerson = peopleStore.people.find(person => person.id === service.responsible_person_id);
+      const responsiblePerson = peopleStore.people.find(person => String(person.id) === String(service.responsible_person_id));
       return {
         title: service.title,
         content: service.description,
-        responsiblePerson
+        image: responsiblePerson.picture_url,
+        responsible: responsiblePerson.name
       };
     }));
 
