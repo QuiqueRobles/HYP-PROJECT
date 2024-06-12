@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
-    }
+    },
+    baseURL: '/HYP-PROJECT/' 
   },
   css: ['@/assets/styles/main.css'],
   modules: ['@pinia/nuxt', 'vuetify-nuxt-module', 'usebootstrap', '@vesp/nuxt-fontawesome'],
