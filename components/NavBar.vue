@@ -18,7 +18,7 @@
           <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
           <nuxt-link class="navbar-item" to="/about">Who we are</nuxt-link>
           <nuxt-link class="navbar-item" to="/services">Services</nuxt-link>
-          <nuxt-link class="navbar-item" to="/support">Support</nuxt-link>
+          <nuxt-link class="navbar-item" to="/projects">Projects</nuxt-link>
           <nuxt-link class="navbar-item" to="/contact">Contact</nuxt-link>
           <nuxt-link class="navbar-item" to="/people">People</nuxt-link>
         </div>
