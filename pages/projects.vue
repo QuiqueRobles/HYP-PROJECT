@@ -1,47 +1,76 @@
 <template>
-  <div>
-    <h1>Projects List</h1>
-    <ul>
-      <li v-for="project in projects" :key="project.id">
-        <img :src="project.picture_url" :alt="project.title" width="100" />
-        <h2>{{ project.title }}</h2>
-        <p>{{ project.description }}</p>
-      </li>
-    </ul>
-    <h2>Add a New Project</h2>
-    <form @submit.prevent="addNewProject">
-      <input v-model="newProject.title" placeholder="Title" required />
-      <input v-model="newProject.picture_url" placeholder="Picture URL" required />
-      <textarea v-model="newProject.description" placeholder="Description" required></textarea>
-      <input v-model="newProject.responsible_person_id" placeholder="Responsible Person ID" type="number" required />
-      <button type="submit">Add Project</button>
-    </form>
+  <div class="support-page">
+    <HeroBannerSupport />
+    <CallToAction />
+    
+    <div class="container">
+      <h2>Resources for Women</h2>
+      <div class="resource-cards">
+        <ResourceCard v-for="(resource, index) in resources" :key="index" :resource="resource" />
+      </div>
+
+      <Testimonials />
+      
+      <FAQAccordion />
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script>
+import HeroBanner from '@/components/HeroBannerSupport.vue'
+import CallToAction from '@/components/CallToAction.vue'
+import ResourceCard from '@/components/ResourceCard.vue'
+import Testimonials from '@/components/Testimonials.vue'
+import FAQAccordion from '@/components/FAQAccordion.vue'
 import { useProjectsStore } from '~/stores/projects';
+import { usePeopleStore } from '~/stores/people';
+const ProjectsStore =useProjectsStore();
+const peopleStore = usePeopleStore();
 
-const store = useProjectsStore();
-const projects = store.projects;
-const newProject = ref({ title: '', picture_url: '', description: '', responsible_person_id: 0 });
+export default {
+  name: 'ProjectsPage',
+  components: {
+    HeroBanner,
+    CallToAction,
+    ResourceCard,
+    Testimonials,
+    FAQAccordion
+  },
+  data() {
+    
 
-function addNewProject() {
-  store.addProject({ ...newProject.value });
-  newProject.value = { title: '', picture_url: '', description: '', responsible_person_id: 0 };
+
+    const resources = computed(() => ProjectsStore.projects.map(project => {
+      const responsiblePerson = peopleStore.people.find(person => String(person.id) === String(project.responsible_person_id));
+      return {
+        title: project.title,
+        description: project.description,
+        image: project.picture_url,
+        responsible_image: responsiblePerson.picture_url,
+        responsible: responsiblePerson.name
+      };
+    }));
+    return {resources};
+  }
 }
 </script>
 
 <style scoped>
-form {
-  margin-top: 20px;
+.container {
+  padding: 2rem;
 }
-input, textarea {
-  display: block;
-  margin: 5px 0;
+
+.resource-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }
-img {
-  border-radius: 50%;
+
+h2 {
+  text-align: center;
+  margin-top: 4rem;
+  color: #6a0dad;
+  font-size: 2.5rem;
 }
 </style>
