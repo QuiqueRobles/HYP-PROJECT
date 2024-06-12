@@ -2,7 +2,7 @@
   <div class="call-to-action">
     <h2>Seek Support Now</h2>
     <p>If you or someone you know needs help, don't hesitate to reach out.</p>
-    <button>Contact Us</button>
+    <button><nuxt-link class="navbar-item" to="/contact">Contact Us</nuxt-link></button>
   </div>
 </template>
 
