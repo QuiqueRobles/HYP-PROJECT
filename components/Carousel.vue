@@ -2,7 +2,7 @@
   <div class="carousel-container">
     <swiper :options="swiperOptions">
       <swiper-slide v-for="(image, index) in images" :key="index">
-        <img :src="(`@/public/${image}`)" alt="Carousel Image" class="carousel-image">
+        <img :src="(`@/${image}`)" alt="Carousel Image" class="carousel-image">
       </swiper-slide>
       <!-- Add pagination -->
       <div class="swiper-pagination"></div>

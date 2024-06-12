@@ -18,9 +18,9 @@ export default {
       slideWidth: 800, // Ajustar el ancho del carrusel
       slideHeight: 400, // Ajustar la altura del carrusel
       images: [
-        { src: 'public/carrusel-3.jpg', alt: 'Image 1' },
-        { src: 'public/carrusel-2.jpg', alt: 'Image 2' },
-        { src: 'public/carrusel-1.jpeg', alt: 'Image 3' }
+        { src: '/carrusel-3.jpg', alt: 'Image 1' },
+        { src: '/carrusel-2.jpg', alt: 'Image 2' },
+        { src: '/carrusel-1.jpeg', alt: 'Image 3' }
       ]
     }
   },

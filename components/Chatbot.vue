@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chatbot-tab" @click="toggleChatbot">
-      <span>{{ isOpen ? '>' : '<' }}</span>
+      <span>{{ isOpen ? '>' : '< Open our Chatbot!' }}</span>
     </div>
     <transition name="slide-fade">
       <div v-if="isOpen" class="chatbot">
