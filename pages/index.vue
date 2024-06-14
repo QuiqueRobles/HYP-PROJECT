@@ -4,11 +4,12 @@
     <div class="container">
       <main>
         <section class="intro-section">
-          <h1>AGAINST WOMEN'S VIOLENCE </h1>
+          <h1>AGAINST WOMEN'S VIOLENCE</h1>
           <p>The National Anti-violence Network run by women's organizations</p>
+          <CallToAction />
         </section>
         <Valores />
-
+        <Features />
         <section class="centers-section">
           <h2>Anti-Violence Centers</h2>
           <div class="center-list">
@@ -17,6 +18,7 @@
             </div>
           </div>
         </section>
+        <FAQ />
       </main>
     </div>
   </div>
@@ -26,12 +28,20 @@
 import HeroBanner from '@/components/HeroBanner.vue'
 import CenterCard from '@/components/CenterCard.vue'
 import Valores from '@/components/Valores.vue'
+import Testimonials from '@/components/Testimonials.vue'
+import CallToAction from '@/components/CallToAction.vue'
+import Features from '@/components/Features.vue'
+import FAQ from '@/components/FAQ.vue'
 
 export default {
   components: {
     HeroBanner,
     CenterCard,
-    Valores
+    Valores,
+    Testimonials,
+    CallToAction,
+    Features,
+    FAQ
   },
   data() {
     return {
@@ -94,6 +104,7 @@ export default {
   font-size: 18px;
   color: #555;
 }
+
 /* Estilos para la sección de los centros */
 .centers-section {
   padding: 50px 20px;
@@ -180,4 +191,3 @@ export default {
   background-color: #7b1fa2;
 }
 </style>
-
