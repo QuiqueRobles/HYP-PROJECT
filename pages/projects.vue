@@ -9,7 +9,7 @@
         <ResourceCard v-for="(resource, index) in resources" :key="index" :resource="resource" />
       </div>
 
-      <Testimonials />
+      <br><br>
       
       <FAQAccordion />
     </div>

@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <ServicesIntroduction />
+    
     <h1>Our Activities</h1>
     <p class="subtitle">Discover the diverse range of services and activities we offer to support women in need.</p>
 
@@ -10,21 +12,25 @@
       <p>If you or someone you know is experiencing domestic violence, reach out to us for support.</p>
       <router-link to="/contact" class="cta-button">Contact Us</router-link>
     </div>
-
+    <Testimonials />
     <FeedbackForm />
   </div>
 </template>
 
 <script>
+import Introduction from '@/components/ServicesIntroduction.vue';
 import AccordionComponent from '@/components/AccordionComponent.vue';
 import FeedbackForm from '@/components/FeedbackForm.vue';
 import { useServicesStore } from '~/stores/services';
 import { usePeopleStore } from '~/stores/people';
+import Testimonials from '@/components/Testimonials.vue'
 
 export default {
   name: 'ServicesPage',
   components: {
+    Introduction,
     AccordionComponent,
+    Testimonials,
     FeedbackForm
   },
   setup() {
@@ -49,7 +55,7 @@ export default {
 <style scoped>
 .container {
   padding: 2rem;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -112,7 +118,7 @@ h1 {
   background-color: #6a0dad;
   color: white;
   border: none;
-  text-align: center; /* Centering titles */
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
   font-size: 1.4rem;

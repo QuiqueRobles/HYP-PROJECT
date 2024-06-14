@@ -1,84 +1,122 @@
 <template>
   <div class="image-slider">
-    <div class="slider-container" :style="{ width: `${slideWidth}px`, height: `${slideHeight}px`, transform: `translateX(-${currentSlide * slideWidth}px)` }">
-      <div class="slider-slide" v-for="(image, index) in images" :key="index">
-        <img :src="image.src" :alt="image.alt">
+    <div class="slider-container">
+      <div class="slider" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+        <div v-for="(image, index) in images" :key="index" class="slide">
+          <img :src="image.src" :alt="image.alt" class="slide-image" />
+        </div>
       </div>
+      <button class="nav prev" @click="prevSlide">❮</button>
+      <button class="nav next" @click="nextSlide">❯</button>
     </div>
-    <button class="slider-button prev" @click="prevSlide">❮</button>
-    <button class="slider-button next" @click="nextSlide">❯</button>
+    <div class="indicators">
+      <span v-for="(image, index) in images" :key="index" :class="{ active: index === currentIndex }" @click="goToSlide(index)"></span>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      currentSlide: 0,
-      slideWidth: 800, // Ajustar el ancho del carrusel
-      slideHeight: 400, // Ajustar la altura del carrusel
-      images: [
-        { src: '/carrusel-3.jpg', alt: 'Image 1' },
-        { src: '/carrusel-2.jpg', alt: 'Image 2' },
-        { src: '/carrusel-1.jpeg', alt: 'Image 3' }
-      ]
+  name: 'ImageSlider',
+  props: {
+    images: {
+      type: Array,
+      required: true
     }
   },
-  methods: {
-    nextSlide() {
-      this.currentSlide = (this.currentSlide + 1) % this.images.length;
-    },
-    prevSlide() {
-      this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
-    }
+  setup(props) {
+    const currentIndex = ref(0);
+
+    const nextSlide = () => {
+      currentIndex.value = (currentIndex.value + 1) % props.images.length;
+    };
+
+    const prevSlide = () => {
+      currentIndex.value = (currentIndex.value - 1 + props.images.length) % props.images.length;
+    };
+
+    const goToSlide = (index) => {
+      currentIndex.value = index;
+    };
+
+    return { currentIndex, nextSlide, prevSlide, goToSlide };
   }
-}
+};
 </script>
 
 <style scoped>
 .image-slider {
   position: relative;
-  max-width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .slider-container {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  position: relative;
+  width: 100%;
   overflow: hidden;
 }
 
-.slider-slide {
-  min-width: 100%;
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
-.image-slider img {
+.slide {
+  min-width: 100%;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide-image {
   width: 100%;
   height: auto;
+  display: block;
 }
 
-.slider-button {
+.nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(94, 58, 127, 0.7);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
   border: none;
+  color: #fff;
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
-  user-select: none;
-  font-size: 24px;
+  z-index: 1;
 }
 
-.slider-button.prev {
+.prev {
   left: 10px;
 }
 
-.slider-button.next {
+.next {
   right: 10px;
 }
 
-.slider-button:hover {
-  background-color: rgba(94, 58, 127, 0.9);
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.indicators span {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.indicators span.active {
+  background-color: #6a0dad;
 }
 </style>
