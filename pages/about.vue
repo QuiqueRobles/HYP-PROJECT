@@ -76,7 +76,7 @@ export default {
 }
 
 .header-bg {
-  background-image: url('header_about_us.jpg');
+  background-image: url('@/public/header_about_us.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
