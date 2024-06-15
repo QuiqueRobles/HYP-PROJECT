@@ -15,36 +15,34 @@
 </template>
 
 <script>
-// Importa la conexión a la base de datos SQLite
 import db from '@/plugins/db.js';
 
 export default {
-  data() {      
+  async asyncData({ error }) {
+    try {
+      const query = "SELECT * FROM People";
+      return new Promise((resolve, reject) => {
+        db.all(query, [], (err, rows) => {
+          if (err) {
+            console.error(err.message);
+            error({ statusCode: 500, message: 'Error al cargar la lista de personas' });
+            reject(err);
+          } else {
+            resolve({ people: rows });
+          }
+        });
+      });
+    } catch (e) {
+      error({ statusCode: 500, message: 'Error al cargar la lista de personas' });
+      return { people: [], error: 'Error al cargar la lista de personas' };
+    }
+  },
+  data() {
     return {
       people: [],
-      error: null
+      error: null,
     };
   },
-  created() {
-    this.fetchPeople();
-  },
-  methods: {
-    fetchPeople() {
-      // Consulta para obtener todas las personas de la tabla
-      const query = "SELECT * FROM People";
-
-      // Realiza la consulta a la base de datos
-      db.all(query, [], (err, rows) => {
-        if (err) {
-          console.error(err.message);
-          this.error = "Error al cargar la lista de personas";
-          return;
-        }
-        // Asigna los resultados a la propiedad 'people'
-        this.people = rows;
-      });
-    }
-  }
 };
 </script>
 
