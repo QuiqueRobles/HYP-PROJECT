@@ -94,7 +94,7 @@ export default {
 }
 
 .navbar-burger.is-active span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px;
+  transform: rotate(-45deg) translateY(-8px);
 }
 
 @media (max-width: 1024px) {
