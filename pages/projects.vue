@@ -4,7 +4,8 @@
     <CallToAction />
     
     <div class="container">
-      <h2>Resources for Women</h2>
+      <h2>Discover our projects</h2>
+      <br><br>
       <div class="resource-cards">
         <ResourceCard v-for="(resource, index) in resources" :key="index" :resource="resource" />
       </div>

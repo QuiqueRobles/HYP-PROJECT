@@ -5,8 +5,8 @@
       Your browser does not support the video tag.
     </video>
     <div class="hero-content">
-      <h1>Welcome to our Anti-Violence Centers</h1>
-      <p>Providing support and assistance to victims of domestic violence</p>
+      <h1 class="neon-text">Welcome to our Anti-Violence Centers</h1>
+      <p class="neon-text">Providing support and assistance to victims of domestic violence</p>
       <button class="scroll-button" @click="scrollToCenters">Learn More</button>
     </div>
   </section>
@@ -52,21 +52,29 @@ export default {
   z-index: 1;
   max-width: 80%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  border-radius: 10px;
+}
+
+.neon-text {
+  text-shadow: 
+    0 0 5px #9400D3,
+    0 0 10px #9400D3,
+    0 0 15px #9400D3,
+    0 0 20px #9400D3,
+    0 0 25px #9400D3,
+    0 0 30px #9400D3,
+    0 0 35px #9400D3;
+  color: #fff;
 }
 
 .hero-content h1 {
   font-size: 48px;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content p {
   font-size: 24px;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .scroll-button {
@@ -84,3 +92,7 @@ export default {
   background-color: #550099;
 }
 </style>
+
+
+
+background: rgba(0, 0, 0, 0.5);

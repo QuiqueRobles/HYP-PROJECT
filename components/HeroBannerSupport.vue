@@ -6,8 +6,8 @@
       Your browser does not support the video tag.
     </video>
     <div class="container">
-      <h1>Welcome to Our Support Center</h1>
-      <p>Providing assistance and resources for women in need.</p>
+      <h1 class="neon-text">Welcome to Our Support Center</h1>
+      <p class="neon-text">Providing assistance and resources for women in need.</p>
       <button class="scroll-down-btn" @click="scrollToNextSection">Scroll Down</button>
     </div>
   </div>
@@ -17,7 +17,7 @@
 export default {
   methods: {
     scrollToNextSection() {
-      const nextSection = document.querySelector('.first-section'); // Cambia '.first-section' al selector de la siguiente sección
+      const nextSection = document.querySelector('.first-section'); // Change '.first-section' to the selector of the next section
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
@@ -28,7 +28,7 @@ export default {
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 80vh; /* Modifica la altura del banner */
+  height: 80vh; /* Adjust the height of the banner */
   overflow: hidden;
 }
 
@@ -38,7 +38,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color y la opacidad del overlay */
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity of the overlay */
 }
 
 .hero-video {
@@ -59,20 +59,31 @@ export default {
   z-index: 1;
 }
 
-h1 {
+h1,
+p {
   color: #fff;
-  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-p {
+.neon-text {
   color: #fff;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  text-shadow: 
+    0 0 5px #9400D3,
+    0 0 10px #9400D3,
+    0 0 15px #9400D3,
+    0 0 20px #9400D3,
+    0 0 25px #9400D3,
+    0 0 30px #9400D3,
+    0 0 35px #9400D3;
+  font-size: 3rem; /* Adjust the font size as needed */
+}
+
+p.neon-text {
+  font-size: 1.5rem; /* Adjust the font size as needed */
 }
 
 .scroll-down-btn {
-  background-color: #6a0dad; /* Cambia el color del botón según sea necesario */
+  background-color: #6a0dad; /* Change the button color as needed */
   color: #fff;
   font-size: 1rem;
   padding: 0.75rem 2rem;
@@ -83,6 +94,6 @@ p {
 }
 
 .scroll-down-btn:hover {
-  background-color: #4b077e; /* Cambia el color del botón al pasar el ratón sobre él */
+  background-color: #4b077e; /* Change the button color on hover */
 }
 </style>

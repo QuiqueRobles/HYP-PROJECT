@@ -1,24 +1,21 @@
 <template>
   <div class="resource-card">
-    <img :src="resource.image" alt="Resource Image" class="resource-image">
+    <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
     <div class="resource-details">
       <h3>{{ resource.title }}</h3>
       <p>{{ resource.description }}</p>
-      <br>
     </div>
 
     <div class="responsible-details">
       <hr>
-        <p> <br> Responsible person:</p>
-
-        <div class="responsible-person">
-          <img :src="resource.responsible_image" alt="image" class="responsible-image" />
-          <div class="responsible-name">
-            <p>{{ resource.responsible }}</p>
-          </div>
+      <p>Responsible person:</p>
+      <div class="responsible-person">
+        <img :src="resource.responsible_image" :alt="`Image of ${resource.responsible}`" class="responsible-image" />
+        <div class="responsible-name">
+          <p>{{ resource.responsible }}</p>
         </div>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -34,6 +31,18 @@ export default {
 </script>
 
 <style scoped>
+@keyframes neon-border {
+  0% {
+    box-shadow: 0 0 5px #9400D3, 0 0 10px #9400D3, 0 0 15px #9400D3, 0 0 20px #9400D3, 0 0 25px #9400D3, 0 0 30px #9400D3, 0 0 35px #9400D3;
+  }
+  50% {
+    box-shadow: 0 0 10px #9400D3, 0 0 20px #9400D3, 0 0 30px #9400D3, 0 0 40px #9400D3, 0 0 50px #9400D3, 0 0 60px #9400D3, 0 0 70px #9400D3;
+  }
+  100% {
+    box-shadow: 0 0 5px #9400D3, 0 0 10px #9400D3, 0 0 15px #9400D3, 0 0 20px #9400D3, 0 0 25px #9400D3, 0 0 30px #9400D3, 0 0 35px #9400D3;
+  }
+}
+
 .resource-card {
   background-color: #f8f8f8;
   border-radius: 8px;
@@ -43,20 +52,27 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 400px; /* Limita el ancho máximo de la tarjeta */
-  margin: 1rem auto; /* Centra la tarjeta horizontalmente y añade un margen */
+  max-width: 400px;
+  margin: 1rem auto;
+  transition: border 0.3s, box-shadow 0.3s;
+  position: relative; /* Required for pseudo-element */
+}
+
+.resource-card:hover {
+  border: 2px solid #9400D3;
+  animation: neon-border 1.5s infinite alternate;
 }
 
 .resource-image {
-  width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
-  max-height: 300px; /* Establece una altura máxima para la imagen */
-  object-fit: cover; /* Escala la imagen para cubrir todo el contenedor */
-  border-radius: 8px; /* Agrega bordes redondeados */
-  margin-bottom: 1rem; /* Añade un margen inferior para separar la imagen de los detalles */
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .resource-details {
-  flex: 1; /* Permite que los detalles del recurso ocupen todo el espacio disponible */
+  flex: 1;
 }
 
 .responsible-details {
@@ -71,14 +87,14 @@ export default {
 }
 
 .responsible-image {
-  width: 50px; /* Ajusta el ancho de la imagen del responsable */
-  height: 50px; /* Ajusta la altura de la imagen del responsable */
-  border-radius: 50%; /* Hace la imagen circular */
-  margin-right: 0.5rem; /* Añade un margen derecho para separar la imagen del nombre */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
 }
 
 .responsible-name {
-  flex: 1; /* Permite que el nombre del responsable ocupe el espacio disponible */
+  flex: 1;
 }
 
 h3 {
@@ -88,5 +104,23 @@ h3 {
 
 p {
   font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .resource-card {
+    padding: 1rem;
+  }
+
+  .resource-image {
+    max-height: 200px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
 }
 </style>

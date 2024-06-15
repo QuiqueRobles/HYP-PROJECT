@@ -6,11 +6,17 @@
           <img class="logo" src="@/assets/logo.png" alt="Logo">
           <span class="navbar-title">Anti-Violence Centers</span>
         </nuxt-link>
-        <div class="navbar-burger" @click="toggleMenu" :class="{'is-active': isActive}" aria-expanded="isActive" aria-label="menu">
+        <button
+          class="navbar-burger"
+          @click="toggleMenu"
+          :class="{'is-active': isActive}"
+          aria-expanded="isActive"
+          aria-label="menu"
+        >
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </button>
       </div>
 
       <div :class="{'navbar-menu': true, 'is-active': isActive}">
@@ -66,6 +72,8 @@ export default {
 .navbar-burger {
   display: none;
   cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
 .navbar-burger span {
@@ -74,13 +82,11 @@ export default {
   height: 3px;
   background-color: white;
   margin: 5px 0;
-  transition: all 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
 .navbar-burger.is-active span:nth-child(1) {
-  transform: rotate(45deg);
-  position: relative;
-  top: 8px;
+  transform: rotate(45deg) translateY(8px);
 }
 
 .navbar-burger.is-active span:nth-child(2) {
@@ -88,9 +94,7 @@ export default {
 }
 
 .navbar-burger.is-active span:nth-child(3) {
-  transform: rotate(-45deg);
-  position: relative;
-  top: -8px;
+  transform: rotate(-45deg) translateY(-8px;
 }
 
 @media (max-width: 1024px) {
@@ -100,13 +104,19 @@ export default {
 
   .navbar-menu {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6a1b9a;
+    padding: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .navbar-menu.is-active {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
   }
 
   .navbar-end {
@@ -116,7 +126,7 @@ export default {
   }
 
   .navbar-item {
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
     width: 100%;
     text-align: center;
   }
@@ -179,9 +189,5 @@ export default {
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
-}
-
-.is-active {
-  display: block !important;
 }
 </style>

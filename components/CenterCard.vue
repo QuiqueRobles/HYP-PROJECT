@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     showModal(center) {
-      // Aquí puedes implementar la lógica para mostrar un modal con más información
+      // Here you can implement the logic to show a modal with more information
       alert(`More info about ${center.title}`);
     }
   }
@@ -38,6 +38,13 @@ export default {
   overflow: hidden;
   position: relative;
   padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.center-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .center-card-content {
@@ -75,10 +82,31 @@ export default {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .center-card-footer button:hover {
   background-color: #7b1fa2;
+  transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .center-card {
+    padding: 15px;
+  }
+
+  .center-card h3 {
+    font-size: 20px;
+  }
+
+  .center-card p {
+    font-size: 14px;
+  }
+
+  .center-card-footer button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
 }
 </style>
