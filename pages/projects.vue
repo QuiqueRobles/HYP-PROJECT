@@ -9,51 +9,53 @@
       <div class="resource-cards">
         <ResourceCard v-for="(resource, index) in resources" :key="index" :resource="resource" />
       </div>
-
       <br><br>
-      
       <FAQAccordion />
     </div>
   </div>
 </template>
 
 <script>
-import HeroBanner from '@/components/HeroBannerSupport.vue'
-import CallToAction from '@/components/CallToAction.vue'
-import ResourceCard from '@/components/ResourceCard.vue'
-import Testimonials from '@/components/Testimonials.vue'
-import FAQAccordion from '@/components/FAQAccordion.vue'
+import { computed, onMounted } from 'vue';
 import { useProjectsStore } from '~/stores/projects';
 import { usePeopleStore } from '~/stores/people';
-const ProjectsStore =useProjectsStore();
-const peopleStore = usePeopleStore();
+import HeroBannerSupport from '@/components/HeroBannerSupport.vue';
+import CallToAction from '@/components/CallToAction.vue';
+import ResourceCard from '@/components/ResourceCard.vue';
+import FAQAccordion from '@/components/FAQAccordion.vue';
 
 export default {
   name: 'ProjectsPage',
   components: {
-    HeroBanner,
+    HeroBannerSupport,
     CallToAction,
     ResourceCard,
-    Testimonials,
-    FAQAccordion
+    FAQAccordion,
   },
-  data() {
-    
+  setup() {
+    const projectsStore = useProjectsStore();
+    const peopleStore = usePeopleStore();
 
+    // Simulate data fetching
+    onMounted(async () => {
+      await projectsStore.fetchProjects(); // Replace with actual fetch function
+      await peopleStore.fetchPeople(); // Replace with actual fetch function
+    });
 
-    const resources = computed(() => ProjectsStore.projects.map(project => {
+    const resources = computed(() => projectsStore.projects.map(project => {
       const responsiblePerson = peopleStore.people.find(person => String(person.id) === String(project.responsible_person_id));
       return {
         title: project.title,
         description: project.description,
         image: project.picture_url,
-        responsible_image: responsiblePerson.picture_url,
-        responsible: responsiblePerson.name
+        responsible_image: responsiblePerson ? responsiblePerson.picture_url : '',
+        responsible: responsiblePerson ? responsiblePerson.name : 'Unknown',
       };
     }));
-    return {resources};
+
+    return { resources };
   }
-}
+};
 </script>
 
 <style scoped>

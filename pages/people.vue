@@ -25,13 +25,11 @@
         </div>
       </li>
     </ul>
-
-    
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { usePeopleStore } from '~/stores/people';
 import { useServicesStore } from '~/stores/services';
 import { useProjectsStore } from '~/stores/projects';
@@ -55,6 +53,8 @@ function getServices(personId) {
 function getProjects(personId) {
   return projectsStore.projects.filter(project => project.responsible_person_id === personId);
 }
+
+
 </script>
 
 <style scoped>
