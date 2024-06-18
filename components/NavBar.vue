@@ -2,8 +2,8 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <nuxt-link class="navbar-item" to="/">
-          <img class="logo" src="@/assets/logo.png" alt="Logo">
+        <nuxt-link class="navbar-item" to="/" aria-label="Home">
+          <img class="logo" src="@/assets/logo.png" alt="Anti-Violence Centers Logo">
           <span class="navbar-title">Anti-Violence Centers</span>
         </nuxt-link>
         <button
@@ -21,12 +21,12 @@
 
       <div :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-end">
-          <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
-          <nuxt-link class="navbar-item" to="/about">Who we are</nuxt-link>
-          <nuxt-link class="navbar-item" to="/services">Services</nuxt-link>
-          <nuxt-link class="navbar-item" to="/projects">Projects</nuxt-link>
-          <nuxt-link class="navbar-item" to="/contact">Contact</nuxt-link>
-          <nuxt-link class="navbar-item" to="/people">People</nuxt-link>
+          <nuxt-link class="navbar-item" to="/" aria-label="Home">Home</nuxt-link>
+          <nuxt-link class="navbar-item" to="/about" aria-label="Who we are">Who we are</nuxt-link>
+          <nuxt-link class="navbar-item" to="/services" aria-label="Services">Services</nuxt-link>
+          <nuxt-link class="navbar-item" to="/projects" aria-label="Projects">Projects</nuxt-link>
+          <nuxt-link class="navbar-item" to="/contact" aria-label="Contact">Contact</nuxt-link>
+          <nuxt-link class="navbar-item" to="/people" aria-label="People">People</nuxt-link>
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@ export default {
   .navbar-menu {
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     background-color: #6a1b9a;
     padding: 1rem;
     position: absolute;
@@ -121,14 +121,15 @@ export default {
 
   .navbar-end {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
   }
 
   .navbar-item {
     margin: 0.5rem 0;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    padding: 0.75rem 1rem;
   }
 }
 
