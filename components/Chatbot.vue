@@ -51,6 +51,7 @@ export default {
       });
 
       try {
+        
         // Send the user's message to the OpenAI API
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
