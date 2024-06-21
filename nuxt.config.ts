@@ -26,4 +26,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'github-pages'
   }
+  ,runtimeConfig: {
+    public: {
+      openaiApiKey: process.env.NUXT_PUBLIC_OPENAI_API_KEY
+    }
+  }
 })

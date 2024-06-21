@@ -56,7 +56,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer PUT_YOUR_KEY_HERE` // Reemplaza con tu clave API
+            'Authorization': `Bearer ${process.env.NUXT_PUBLIC_OPENAI_API_KEY}` // Reemplaza con tu clave API
           },
           body: JSON.stringify({
             model: "gpt-4",
