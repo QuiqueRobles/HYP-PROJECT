@@ -29,15 +29,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+
+import { ref, onMounted } from 'vue';
 import { usePeopleStore } from '~/stores/people';
 import { useServicesStore } from '~/stores/services';
 import { useProjectsStore } from '~/stores/projects';
+import PeopleIntroduction from '@/components/PeopleIntroduction.vue';
 
 const store = usePeopleStore();
 const servicesStore = useServicesStore();
 const projectsStore = useProjectsStore();
 const people = store.people;
+
+
+const newPerson = ref({ name: '', picture_url: '', cv: '' });
+function addNewPerson() {
+  store.addPerson({ ...newPerson.value });
+  newPerson.value = { name: '', picture_url: '', cv: '' };
+}
 
 function getServices(personId) {
   return servicesStore.services.filter(service => service.responsible_person_id === personId);
@@ -122,6 +131,33 @@ ul {
 
 .link-item:hover {
   color: #0056b3;
+}
+
+.add-person {
+  margin-top: 40px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.add-person-form {
+  display: grid;
+  grid-gap: 15px;
+}
+.input-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4a148c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 </style>
