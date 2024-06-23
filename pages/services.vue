@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ServicesIntroduction />
-    
+
     <h1>Our Activities</h1>
     <p class="subtitle">Discover the diverse range of services and activities we offer to support women in need.</p>
 
@@ -18,17 +18,17 @@
 </template>
 
 <script>
-import Introduction from '@/components/ServicesIntroduction.vue';
+import ServicesIntroduction from '@/components/ServicesIntroduction.vue';
 import AccordionComponent from '@/components/AccordionComponent.vue';
 import FeedbackForm from '@/components/FeedbackForm.vue';
 import { useServicesStore } from '~/stores/services';
 import { usePeopleStore } from '~/stores/people';
-import Testimonials from '@/components/Testimonials.vue'
+import Testimonials from '@/components/Testimonials.vue';
 
 export default {
   name: 'ServicesPage',
   components: {
-    Introduction,
+    ServicesIntroduction,
     AccordionComponent,
     Testimonials,
     FeedbackForm
@@ -43,7 +43,8 @@ export default {
         title: service.title,
         content: service.description,
         image: responsiblePerson.picture_url,
-        responsible: responsiblePerson.name
+        responsible: responsiblePerson.name,
+        responsibleId: responsiblePerson.id // Agregado ID del responsable
       };
     }));
 
@@ -152,5 +153,15 @@ h1 {
 .responsible-person-info {
   font-size: 1.2rem;
   color: #333;
+}
+
+/* Link style */
+.link-item {
+  color: #6a0dad;
+  text-decoration: none;
+}
+
+.link-item:hover {
+  text-decoration: underline;
 }
 </style>
