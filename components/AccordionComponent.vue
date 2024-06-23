@@ -12,7 +12,7 @@
         <div class="responsible-person">
           <img :src="item.image" alt="image" class="responsible-image" />
           <div class="responsible-name">
-            <p>{{ item.responsible }}</p>
+            <router-link class="link-item" :to="{ path: '/people', hash: `#person-${item.responsibleId}` }">{{ item.responsible }}</router-link>
           </div>
         </div>
 
@@ -49,7 +49,6 @@ export default {
       this.activeIndex = this.activeIndex === index ? null : index;
     }
   }
-
 }
 </script>
 
@@ -69,7 +68,7 @@ export default {
   background-color: #6a0dad;
   color: white;
   border: none;
-  text-align: center; /* Centering titles */
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
   font-size: 1.4rem;
@@ -103,4 +102,13 @@ export default {
   margin-right: 20px;
 }
 
+/* Link style */
+.link-item {
+  color: #6a0dad;
+  text-decoration: none;
+}
+
+.link-item:hover {
+  text-decoration: underline;
+}
 </style>
