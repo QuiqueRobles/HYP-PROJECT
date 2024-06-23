@@ -125,8 +125,3 @@ ul {
 }
 
 </style>
-
-.submit-button:hover {
-  background-color: #7b1fa2;
-}
-</style>
