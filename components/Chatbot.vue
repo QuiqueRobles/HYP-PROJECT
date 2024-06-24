@@ -65,7 +65,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer YOUR_KEY`
+            'Authorization': `Bearer ${config.public.openaiApiKey}`
           },
           body: JSON.stringify({
             model: "gpt-4",
