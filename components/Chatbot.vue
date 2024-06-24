@@ -30,7 +30,13 @@
 </template>
 
 <script>
+import { useRuntimeConfig } from '#app'
+
+const config = useRuntimeConfig()
+const openaiApiKey = config.public.openaiApiKey
+
 export default {
+  
   data() {
     return {
       isOpen: false,
@@ -65,7 +71,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${config.public.openaiApiKey}`
+            'Authorization': `Bearer ${openaiApiKey}`
           },
           body: JSON.stringify({
             model: "gpt-4",
