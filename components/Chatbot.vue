@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { useRuntimeConfig } from '#app'
+//import { useRuntimeConfig } from '#app'
 
 const config = useRuntimeConfig()
 const openaiApiKey = config.public.openaiApiKey
