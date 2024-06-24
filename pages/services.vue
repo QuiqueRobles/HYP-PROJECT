@@ -6,10 +6,11 @@
     <p class="subtitle">Discover the diverse range of services and activities we offer to support women in need.</p>
 
     <AccordionComponent :items="activities" />
-
+    <br><br>
     <div class="call-to-action">
       <h2>Ready to Get Help?</h2>
       <p>If you or someone you know is experiencing domestic violence, reach out to us for support.</p>
+      <br>
       <router-link to="/contact" class="cta-button">Contact Us</router-link>
     </div>
     <Testimonials />

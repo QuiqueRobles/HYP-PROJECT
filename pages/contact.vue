@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- Eliminar la palabra "CONTACT" -->
     <!-- Título principal centrado con el nuevo estilo -->
     <h1 class="title">CONTACT US</h1>
 
@@ -60,33 +59,35 @@
 
     <div class="separator"></div>
 
-    <!-- Información de contacto -->
-    <div class="contact-info">
-      <div class="contact-info-item">
-        <p class="contact-label">
-          <span class="icon">📞</span> Call us:
-        </p>
-        <p class="contact-detail">+39 691718090</p>
-      </div>
-      <div class="contact-info-item">
-        <p class="contact-label">
-          <span class="icon">✉️</span> Email:
-        </p>
-        <p class="contact-detail">
-          <a href="mailto:anti_violence@gmail.com">anti_violence@gmail.com</a>
-        </p>
-      </div>
+    <div class="contact-section">
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <p class="contact-label">
+        <span class="icon">📞</span> Call us:
+      </p>
+      <p class="contact-detail">+39 691718090</p>
     </div>
+    <div class="contact-info-item">
+      <p class="contact-label">
+        <span class="icon">✉️</span> Email:
+      </p>
+      <p class="contact-detail">
+        <a href="mailto:anti_violence@gmail.com">anti_violence@gmail.com</a>
+      </p>
+    </div>
+  </div>
 
-    <!-- Síguenos en redes sociales -->
-    <div class="follow-us">
-      <p class="follow-label">Follow us:</p>
-      <div class="social-icons">
-        <a href="#" target="_blank" class="social-icon"><span class="icon">🌐</span></a>
-        <a href="#" target="_blank" class="social-icon"><span class="icon">🐦</span></a>
-        <a href="#" target="_blank" class="social-icon"><span class="icon">▶️</span></a>
-      </div>
+  <!-- Síguenos en redes sociales -->
+  <div class="follow-us">
+    <p class="follow-label">Follow us:</p>
+    <div class="social-icons">
+      <a href="#" target="_blank" class="social-icon"><span class="icon">🌐</span></a>
+      <a href="#" target="_blank" class="social-icon"><span class="icon">🐦</span></a>
+      <a href="#" target="_blank" class="social-icon"><span class="icon">▶️</span></a>
     </div>
+  </div>
+</div>
+
   </div>
 </template>
 
@@ -195,13 +196,20 @@ button.btn-primary {
   margin: 2rem 0;
 }
 
-.contact-info {
+.contact-section {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.contact-info, .follow-us {
+  flex: 1 1 30%; /* Ensures each column takes up approximately one-third of the space */
+  margin-right: 1rem; /* Adds spacing between the columns */
 }
 
 .contact-info-item {
-  flex: 1;
+  margin-bottom: 1rem;
 }
 
 .contact-label {
@@ -226,11 +234,6 @@ button.btn-primary {
   margin-right: 0.5rem;
 }
 
-.follow-us {
-  margin-top: 2rem;
-  text-align: center;
-}
-
 .follow-label {
   color: purple;
   font-size: 1.5rem;
@@ -248,7 +251,10 @@ button.btn-primary {
   font-size: 2rem;
   text-decoration: none;
 }
-
+.contact-info:not(:last-child),
+.follow-us:not(:last-child) {
+  margin-right: 2rem; /* Add spacing between the columns */
+}
 /* Estilos para el mensaje de éxito */
 .success-message {
   text-align: center;
