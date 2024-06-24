@@ -29,14 +29,14 @@
   </div>
 </template>
 
-<script>
-//import { useRuntimeConfig } from '#app'
 
-const config = useRuntimeConfig()
-const openaiApiKey = config.public.openaiApiKey
+
+
+
+<script>
+import { useRuntimeConfig } from '#app'
 
 export default {
-  
   data() {
     return {
       isOpen: false,
@@ -44,6 +44,15 @@ export default {
       messages: [],
       isLoading: false // For loading state
     };
+  },
+  setup() {
+    const config = useRuntimeConfig()
+    const openaiApiKey = config.public.openaiApiKey
+    console.log('OpenAI API Key:', openaiApiKey)
+
+    return {
+      openaiApiKey
+    }
   },
   methods: {
     toggleChatbot() {
@@ -71,7 +80,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${openaiApiKey}`
+            'Authorization': `Bearer ${this.openaiApiKey}`
           },
           body: JSON.stringify({
             model: "gpt-4",
