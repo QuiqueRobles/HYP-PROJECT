@@ -7,12 +7,14 @@
     </div>
 
     <div class="responsible-details">
+      <br>
       <hr>
       <p>Responsible person:</p>
       <div class="responsible-person">
         <img :src="resource.responsible_image" :alt="`Image of ${resource.responsible}`" class="responsible-image" />
         <div class="responsible-name">
-          <p>{{ resource.responsible }}</p>
+          <router-link class="link-item" v-if="resource.responsibleId" :to="{ path: '/people', hash: `#person-${resource.responsibleId}` }">{{ resource.responsible }}</router-link>
+          <span v-else>{{ resource.responsible }}</span>
         </div>
       </div>
     </div>
@@ -104,6 +106,16 @@ h3 {
 
 p {
   font-size: 1rem;
+}
+
+.link-item {
+  color: #6a0dad;
+  text-decoration: none;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.link-item:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
