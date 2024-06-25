@@ -24,7 +24,12 @@
           <nuxt-link class="navbar-item" to="/" aria-label="Home">Home</nuxt-link>
           <nuxt-link class="navbar-item" to="/about" aria-label="Who we are">Who we are</nuxt-link>
           <nuxt-link class="navbar-item" to="/services" aria-label="Services">Services</nuxt-link>
-          <nuxt-link class="navbar-item" to="/projects" aria-label="Projects">Projects</nuxt-link>
+          <div class="navbar-item has-dropdown" :class="{'is-active': isProjectsActive}">
+            <nuxt-link class="navbar-link" to="/projects" aria-label="Projects" @click="toggleProjectsDropdown">Projects</nuxt-link>
+            <div class="navbar-dropdown">
+              <nuxt-link v-for="project in projects" :key="project.id" class="navbar-item" :to="'/project' + project.id" :aria-label="project.title">{{ project.title }}</nuxt-link>
+            </div>
+          </div>
           <nuxt-link class="navbar-item" to="/contact" aria-label="Contact">Contact</nuxt-link>
           <nuxt-link class="navbar-item" to="/people" aria-label="People">People</nuxt-link>
         </div>
@@ -34,16 +39,31 @@
 </template>
 
 <script>
+import { useProjectsStore } from '~/stores/projects'
+
 export default {
   name: 'NavBar',
   data() {
     return {
-      isActive: false
-    };
+      isActive: false,
+      isProjectsActive: false
+    }
   },
   methods: {
     toggleMenu() {
-      this.isActive = !this.isActive;
+      this.isActive = !this.isActive
+    },
+    toggleProjectsDropdown(event) {
+      if (event) {
+        event.preventDefault()
+      }
+      this.isProjectsActive = !this.isProjectsActive
+    }
+  },
+  computed: {
+    projects() {
+      const projectsStore = useProjectsStore()
+      return projectsStore.projects
     }
   }
 }
@@ -131,6 +151,23 @@ export default {
     text-align: left;
     padding: 0.75rem 1rem;
   }
+
+  .navbar-dropdown {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #6a1b9a;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: calc(100% - 2rem); /* Hacer más ancho el menú desplegable */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-item.has-dropdown.is-active .navbar-dropdown {
+    display: flex;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -148,6 +185,23 @@ export default {
   .navbar-item {
     margin-right: 1rem;
   }
+
+  .navbar-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #6a1b9a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    padding: 0.5rem 0;
+    width: 250px; /* Ajustar el ancho del menú desplegable */
+  }
+
+  .navbar-item.has-dropdown:hover .navbar-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .navbar-item {
@@ -157,6 +211,7 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
+  font-size: 0.9rem; /* Reducir el tamaño del texto */
 }
 
 .navbar-item:after {
@@ -190,5 +245,30 @@ export default {
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
+}
+
+.navbar-link {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.navbar-link:hover {
+  color: #ffd1e8;
+}
+
+.navbar-dropdown .navbar-item {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background-color 0.3s;
+}
+
+.navbar-dropdown .navbar-item:hover {
+  background-color: #4e1577;
 }
 </style>

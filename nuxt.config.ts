@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       { hid: 'description', name: 'description', content: 'Support center for women in difficulty' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: 'assets/logo.png' }
     ]
     },
     baseURL: '/HYP-PROJECT/' 
