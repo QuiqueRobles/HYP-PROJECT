@@ -2,17 +2,22 @@
   <div class="project-page" v-if="!loading">
     <div class="container">
       <h2>{{ project.title }}</h2>
-      <img :src="project.picture_url" :alt="`Image of ${project.title}`" class="project-image">
-      <p>{{ project.description }}</p>
-      <div class="responsible-details">
-        <br>
-        <hr>
-        <p>Responsible person:</p>
-        <div class="responsible-person">
-          <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`" class="responsible-image" />
-          <div class="responsible-name">
-            <router-link class="link-item" v-if="responsiblePerson.id" :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name }}</router-link>
-            <span v-else>{{ responsiblePerson.name }}</span>
+      <div class="content">
+        <img :src="project.picture_url" :alt="`Image of ${project.title}`" class="project-image">
+        <div class="description">
+          <p>{{ project.description }}</p>
+          <br>
+          <hr>
+          <div class="responsible-details">
+            <br>
+            <div class="responsible-person">
+              <div>Responsible person:</div>
+              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`" class="responsible-image" />
+              <div class="responsible-name">
+                <router-link class="link-item" v-if="responsiblePerson.id" :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name }}</router-link>
+                <span v-else>{{ responsiblePerson.name }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -63,52 +68,85 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .container {
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #6a0dad;
   text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 2px solid #6a0dad; /* Borde morado */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 1rem; /* Espacio interno */
 }
 
 .project-image {
   width: 100%;
-  max-height: 400px;
+  max-width: 400px; /* Tamaño máximo de la imagen */
+  max-height: 400px; /* Tamaño máximo de la imagen */
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
+  flex: 1;
+}
+
+.description {
+  flex: 1;
+  margin-left: 2rem;
+  font-size: 0.9rem; /* Texto más pequeño */
+  text-align: justify; /* Texto justificado */
+}
+
+.separator {
+  border: 0;
+  height: 2px;
+  background: #6a0dad;
+  margin: 2rem 0;
 }
 
 .responsible-details {
-  width: 100%;
+  font-size: 1rem;
   text-align: left;
 }
 
+.responsible-label {
+  font-weight: bold;
+}
+
 .responsible-person {
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
 }
 
-.responsible-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 0.5rem;
-}
-
 .responsible-name {
-  flex: 1;
+  margin-right: 1rem;   
 }
 
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #6a0dad;
+.responsible-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Texto más pequeño */
+  color: #333;
+  text-align: justify; /* Texto justificado */
 }
 
 .link-item {
@@ -128,17 +166,28 @@ p {
   padding: 2rem;
 }
 
+@media (max-width: 800px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .description {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 1rem;
   }
 
-  .project-image {
-    max-height: 300px;
-  }
-
   h2 {
     font-size: 2rem;
+  }
+
+  .project-image {
+    max-height: 300px;
   }
 
   p {
