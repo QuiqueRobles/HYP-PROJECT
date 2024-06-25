@@ -34,7 +34,7 @@ import { useProjectsStore } from '~/stores/projects';
 import { usePeopleStore } from '~/stores/people';
 
 export default {
-  name: 'Project4Page',
+  name: 'Project5Page',
   setup() {
     const projectsStore = useProjectsStore();
     const peopleStore = usePeopleStore();
@@ -53,7 +53,7 @@ export default {
     });
 
     const project = computed(() => {
-      return projectsStore.projects.find(project => project.id === 4);
+      return projectsStore.projects.find(project => project.id === 5);
     });
 
     const responsiblePerson = computed(() => {
