@@ -1,10 +1,12 @@
 <template>
+
   <div class="resource-card">
-    <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
-    <div class="resource-details">
-      <h3>{{ resource.title }}</h3>
-      <p>{{ resource.description }}</p>
-    </div>
+    <router-link :to="resource.projectLink">
+      <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">   
+      <div class="resource-details">
+          <h3>{{ resource.title }}</h3>
+      </div> 
+    </router-link>
 
     <div class="responsible-details">
       <br>
@@ -115,6 +117,16 @@ p {
 }
 
 .link-item:hover {
+  text-decoration: underline;
+}
+
+.project-title{
+  color: #6a0dad;
+  text-decoration: none;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.project-title:hover {
   text-decoration: underline;
 }
 
