@@ -2,8 +2,8 @@
   <div class="support-page">
     <HeroBannerSupport />
     <CallToAction />
-    
-    <div class="container">
+
+    <div class="container" v-if="!loading">
       <h2>Discover our projects</h2>
       <br><br>
       <div class="resource-cards">
@@ -12,11 +12,15 @@
       <br><br>
       <FAQAccordion />
     </div>
+
+    <div v-else class="loading">
+      <p>Loading...</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useProjectsStore } from '~/stores/projects';
 import { usePeopleStore } from '~/stores/people';
 import HeroBannerSupport from '@/components/HeroBannerSupport.vue';
@@ -35,11 +39,18 @@ export default {
   setup() {
     const projectsStore = useProjectsStore();
     const peopleStore = usePeopleStore();
+    const loading = ref(true);
 
     // Simulate data fetching
     onMounted(async () => {
-      await projectsStore.fetchProjects(); // Replace with actual fetch function
-      await peopleStore.fetchPeople(); // Replace with actual fetch function
+      try {
+        await projectsStore.fetchProjects(); // Replace with actual fetch function
+        await peopleStore.fetchPeople(); // Replace with actual fetch function
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        loading.value = false;
+      }
     });
 
     const resources = computed(() => projectsStore.projects.map(project => {
@@ -54,7 +65,7 @@ export default {
       };
     }));
 
-    return { resources };
+    return { resources, loading };
   }
 };
 </script>
@@ -76,5 +87,12 @@ h2 {
   margin-top: 4rem;
   color: #6a0dad;
   font-size: 2.5rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #6a0dad;
+  padding: 2rem;
 }
 </style>
