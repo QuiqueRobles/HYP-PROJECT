@@ -1,5 +1,5 @@
 <template>
-  <div class="project-page">
+  <div class="project-page" v-if="!loading">
     <div class="container">
       <h2>{{ project.title }}</h2>
       <img :src="project.picture_url" :alt="`Image of ${project.title}`" class="project-image">
@@ -18,10 +18,13 @@
       </div>
     </div>
   </div>
+  <div v-else class="loading">
+    <p>Loading...</p>
+  </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useProjectsStore } from '~/stores/projects';
 import { usePeopleStore } from '~/stores/people';
 
@@ -30,11 +33,18 @@ export default {
   setup() {
     const projectsStore = useProjectsStore();
     const peopleStore = usePeopleStore();
+    const loading = ref(true);
 
     // Simulate data fetching
     onMounted(async () => {
-      await projectsStore.fetchProjects(); // Replace with actual fetch function
-      await peopleStore.fetchPeople(); // Replace with actual fetch function
+      try {
+        await projectsStore.fetchProjects(); // Replace with actual fetch function
+        await peopleStore.fetchPeople(); // Replace with actual fetch function
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        loading.value = false;
+      }
     });
 
     const project = computed(() => {
@@ -48,7 +58,7 @@ export default {
       return {};
     });
 
-    return { project, responsiblePerson };
+    return { project, responsiblePerson, loading };
   }
 };
 </script>
@@ -109,6 +119,13 @@ p {
 
 .link-item:hover {
   text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #6a0dad;
+  padding: 2rem;
 }
 
 @media (max-width: 600px) {

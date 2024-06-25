@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 import { useFetch } from '#app';
 
 interface Project {
@@ -10,24 +11,28 @@ interface Project {
 }
 
 export const useProjectsStore = defineStore('projects', () => {
-  const projects = reactive([] as Project[]);
+  const projects = ref<Project[]>([]);
 
   async function addProject(project: Project) {
     const body = JSON.stringify(project);
     const response = await fetch('/api/projects', { method: 'POST', body });
-    if (response.ok) projects.push(project);
+    if (response.ok) projects.value.push(project);
   }
 
   async function init() {
-    const { data } = await useFetch<any[]>('/api/projects');
+    const { data, error } = await useFetch<Project[]>('/api/projects');
+    if (error.value) {
+      console.error('Error fetching projects:', error.value);
+      return;
+    }
     const list = data.value;
     if (list != null) {
-      projects.splice(0, projects.length);  // Clear the list
-      projects.push(...list);
+      projects.value = list;
     }
   }
 
+  // Llamar a init al crear el store
   init();
 
-  return { projects, addProject };
+  return { projects, addProject, init };
 });
