@@ -13,12 +13,13 @@
             <h3>Responsibilities</h3>
             <ul v-if="getServices(person.id).length">
               <li v-for="service in getServices(person.id)" :key="service.id">
-                <nuxt-link class="link-item" :to="{ path: '/services', query: { index: service.id - 1 } }">{{ service.title }}</nuxt-link>
+                
+                <nuxt-link class="link-item" :to="{ path: `/service${service.id}`, query: { serviceId: service.id } }">{{ service.title }}</nuxt-link>
               </li>
             </ul>
             <ul v-if="getProjects(person.id).length">
               <li v-for="project in getProjects(person.id)" :key="project.id">
-                <nuxt-link class="link-item" to="/projects">{{ project.title }}</nuxt-link>
+                <nuxt-link class="link-item" :to="{ path: `/project${project.id}`, query: { projectId: project.id } }">{{ project.title }}</nuxt-link>
               </li>
             </ul>
           </div>
