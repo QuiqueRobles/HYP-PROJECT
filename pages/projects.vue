@@ -61,7 +61,8 @@ export default {
         image: project.picture_url,
         responsible_image: responsiblePerson ? responsiblePerson.picture_url : '',
         responsible: responsiblePerson ? responsiblePerson.name : 'Unknown',
-        responsibleId: responsiblePerson ? responsiblePerson.id : null // Agregado ID del responsable
+        responsibleId: responsiblePerson ? responsiblePerson.id : null,
+        projectLink: `/project${project.id}`
       };
     }));
 
@@ -96,3 +97,4 @@ h2 {
   padding: 2rem;
 }
 </style>
+
