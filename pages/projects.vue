@@ -97,4 +97,3 @@ h2 {
   padding: 2rem;
 }
 </style>
-
