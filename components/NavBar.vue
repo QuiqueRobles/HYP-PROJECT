@@ -23,11 +23,16 @@
         <div class="navbar-end">
           <nuxt-link class="navbar-item" to="/" aria-label="Home">Home</nuxt-link>
           <nuxt-link class="navbar-item" to="/about" aria-label="Who we are">Who we are</nuxt-link>
-          <nuxt-link class="navbar-item" to="/services" aria-label="Services">Services</nuxt-link>
           <div class="navbar-item has-dropdown" :class="{'is-active': isProjectsActive}">
-            <nuxt-link class="navbar-link" to="/projects" aria-label="Projects" @click="toggleProjectsDropdown">Projects</nuxt-link>
-            <div class="navbar-dropdown">
+            <nuxt-link class="navbar-link" to="/projects" aria-label="Projects" @click="handleProjectsClick">Projects</nuxt-link>
+            <div class="navbar-dropdown" v-if="projects.length">
               <nuxt-link v-for="project in projects" :key="project.id" class="navbar-item" :to="'/project' + project.id" :aria-label="project.title">{{ project.title }}</nuxt-link>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown" :class="{'is-active': isServicesActive}">
+            <nuxt-link class="navbar-link" to="/services" aria-label="Services" @click="handleServicesClick">Services</nuxt-link>
+            <div class="navbar-dropdown" v-if="services.length">
+              <nuxt-link v-for="service in services" :key="service.id" class="navbar-item" :to="'/service' + service.id" :aria-label="service.title">{{ service.title }}</nuxt-link>
             </div>
           </div>
           <nuxt-link class="navbar-item" to="/contact" aria-label="Contact">Contact</nuxt-link>
@@ -39,35 +44,64 @@
 </template>
 
 <script>
-import { useProjectsStore } from '~/stores/projects'
+import { ref, onMounted } from 'vue';
+import { useProjectsStore } from '~/stores/projects';
+import { useServicesStore } from '~/stores/services';
 
 export default {
   name: 'NavBar',
-  data() {
-    return {
-      isActive: false,
-      isProjectsActive: false
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.isActive = !this.isActive
-    },
-    toggleProjectsDropdown(event) {
-      if (event) {
-        event.preventDefault()
+  setup() {
+    const isActive = ref(false);
+    const isProjectsActive = ref(false);
+    const isServicesActive = ref(false);
+    const projectsStore = useProjectsStore();
+    const servicesStore = useServicesStore();
+
+    const toggleMenu = () => {
+      isActive.value = !isActive.value;
+    };
+
+    const toggleProjectsDropdown = () => {
+      isProjectsActive.value = !isProjectsActive.value;
+    };
+
+    const toggleServicesDropdown = () => {
+      isServicesActive.value = !isServicesActive.value;
+    };
+
+    const handleProjectsClick = (event) => {
+      toggleProjectsDropdown();
+    };
+
+    const handleServicesClick = (event) => {
+      toggleServicesDropdown();
+    };
+
+    onMounted(async () => {
+      try {
+        await projectsStore.fetchProjects();
+        await servicesStore.fetchServices();
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-      this.isProjectsActive = !this.isProjectsActive
-    }
-  },
-  computed: {
-    projects() {
-      const projectsStore = useProjectsStore()
-      return projectsStore.projects
-    }
+    });
+
+    return {
+      isActive,
+      isProjectsActive,
+      isServicesActive,
+      projects: projectsStore.projects,
+      services: servicesStore.services,
+      toggleMenu,
+      toggleProjectsDropdown,
+      toggleServicesDropdown,
+      handleProjectsClick,
+      handleServicesClick
+    };
   }
-}
+};
 </script>
+
 
 <style scoped>
 .navbar {
