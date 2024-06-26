@@ -22,41 +22,42 @@
   </div>
 </template>
 
+
+
+
 <script>
 import { ref, computed, onMounted } from 'vue';
 import { useServicesStore } from '~/stores/services';
 import { usePeopleStore } from '~/stores/people';
-import { useRoute } from 'vue-router';
 
 export default {
-  name: 'ServicePage',
+  name: 'Service3Page',
   setup() {
-    const route = useRoute();
     const servicesStore = useServicesStore();
     const peopleStore = usePeopleStore();
     const loading = ref(true);
-    const service = ref(null);
-    const responsiblePerson = ref(null);
 
     // Simulate data fetching
     onMounted(async () => {
       try {
         await servicesStore.fetchServices(); // Replace with actual fetch function
         await peopleStore.fetchPeople(); // Replace with actual fetch function
-        
-        const serviceId = parseInt(route.params.id);
-        const foundService = servicesStore.services.find(service => service.id === serviceId);
-        if (foundService) {
-          service.value = foundService;
-          responsiblePerson.value = peopleStore.people.find(person => String(person.id) === String(foundService.responsible_person_id)) || null;
-        } else {
-          console.error('Service not found');
-        }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         loading.value = false;
       }
+    });
+
+    const service = computed(() => {
+      return servicesStore.services.find(service => service.id === 3);
+    });
+
+    const responsiblePerson = computed(() => {
+      if (service.value) {
+        return peopleStore.people.find(person => String(person.id) === String(service.value.responsible_person_id)) || {};
+      }
+      return {};
     });
 
     return { service, responsiblePerson, loading };
