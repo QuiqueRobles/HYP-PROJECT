@@ -32,11 +32,11 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/', // Agrega las rutas que deban ser prerenderizadas
-        '/project1',
-        '/project2',
-        '/project3',
-        '/project4',
-        '/project5' // Ejemplo de ruta dinámica, ajusta según tus necesidades
+        '/HYP-PROJECT/project1',
+        '/HYP-PROJECT/project2',
+        '/HYP-PROJECT/project3',
+        '/HYP-PROJECT/project4',
+        '/HYP-PROJECT/project5' // Ejemplo de ruta dinámica, ajusta según tus necesidades
         // Agrega aquí otras rutas dinámicas necesarias
       ]
     }
