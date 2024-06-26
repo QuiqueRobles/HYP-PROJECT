@@ -1,19 +1,16 @@
 <template>
   <div class="container">
-    <!-- Título principal centrado con el nuevo estilo -->
     <h1 class="title">CONTACT US</h1>
 
-    <!-- Subtítulos alineados a la izquierda -->
     <p class="subtitle left-aligned">
-      If you have any questions, please fill out the form below and we will get in touch with you shortly. You can also call us or even come visit us.
+      If you have any questions, please fill out the form below and we will get in touch with you shortly. You can also
+      call us or even come visit us.
     </p>
     <p class="subtitle left-aligned">We look forward to seeing you soon!</p>
 
-    <!-- Título del mensaje alineado a la izquierda -->
     <p class="message-title left-aligned">Send us a message:</p>
 
-    <!-- Formulario de contacto -->
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm" class="contact-form">
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" id="name" v-model="name" class="form-control" required />
@@ -40,19 +37,12 @@
 
       <div class="form-group">
         <label for="message">Message:</label>
-        <textarea
-            id="message"
-            v-model="message"
-            class="form-control"
-            rows="5"
-            required
-        ></textarea>
+        <textarea id="message" v-model="message" class="form-control" rows="5" required></textarea>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <!-- Mensaje de éxito tras el envío del formulario -->
     <div v-if="showSuccessMessage" class="success-message">
       Message sent. We will contact you soon.
     </div>
@@ -60,34 +50,32 @@
     <div class="separator"></div>
 
     <div class="contact-section">
-  <div class="contact-info">
-    <div class="contact-info-item">
-      <p class="contact-label">
-        <span class="icon">📞</span> Call us:
-      </p>
-      <p class="contact-detail">+39 691718090</p>
-    </div>
-    <div class="contact-info-item">
-      <p class="contact-label">
-        <span class="icon">✉️</span> Email:
-      </p>
-      <p class="contact-detail">
-        <a href="mailto:anti_violence@gmail.com">anti_violence@gmail.com</a>
-      </p>
-    </div>
-  </div>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <p class="contact-label">
+            <span class="icon">📞</span> Call us:
+          </p>
+          <p class="contact-detail">+39 691718090</p>
+        </div>
+        <div class="contact-info-item">
+          <p class="contact-label">
+            <span class="icon">✉️</span> Email:
+          </p>
+          <p class="contact-detail">
+            <a href="mailto:anti_violence@gmail.com">anti_violence@gmail.com</a>
+          </p>
+        </div>
+      </div>
 
-  <!-- Síguenos en redes sociales -->
-  <div class="follow-us">
-    <p class="follow-label">Follow us:</p>
-    <div class="social-icons">
-      <a href="#" target="_blank" class="social-icon"><span class="icon">🌐</span></a>
-      <a href="#" target="_blank" class="social-icon"><span class="icon">🐦</span></a>
-      <a href="#" target="_blank" class="social-icon"><span class="icon">▶️</span></a>
+      <div class="follow-us">
+        <p class="follow-label">Follow us:</p>
+        <div class="social-icons">
+          <a href="#" target="_blank" class="social-icon"><span class="icon">🌐</span></a>
+          <a href="#" target="_blank" class="social-icon"><span class="icon">🐦</span></a>
+          <a href="#" target="_blank" class="social-icon"><span class="icon">▶️</span></a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
   </div>
 </template>
 
@@ -101,7 +89,7 @@ export default {
       email: '',
       interest: [],
       message: '',
-      showSuccessMessage: false // Controlar la visibilidad del mensaje de éxito
+      showSuccessMessage: false
     };
   },
   methods: {
@@ -113,10 +101,10 @@ export default {
         interest: this.interest,
         message: this.message
       });
-      this.showSuccessMessage = true; // Mostrar mensaje de éxito después de enviar
+      this.showSuccessMessage = true;
       setTimeout(() => {
-        this.showSuccessMessage = false; // Ocultar el mensaje después de unos segundos
-      }, 5000); // Ocultar después de 5 segundos (5000 ms)
+        this.showSuccessMessage = false;
+      }, 5000);
     }
   }
 };
@@ -125,30 +113,38 @@ export default {
 <style scoped>
 .container {
   padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-/* Título principal centrado y estilizado */
 .title {
-  font-size: 36px; /* Tamaño del texto */
-  color: #4a148c; /* Color púrpura */
-  text-align: center; /* Centrar texto */
-  margin-bottom: 40px; /* Espaciado inferior */
-}
-
-/* Subtítulos alineados a la izquierda */
-.subtitle.left-aligned {
-  font-size: 1.2rem;
+  font-size: 2.5rem;
+  color: #4a148c;
+  text-align: center;
   margin-bottom: 1rem;
-  text-align: left; /* Alinear a la izquierda */
 }
 
-/* Título del mensaje alineado a la izquierda */
+.subtitle.left-aligned {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: #555;
+}
+
 .message-title.left-aligned {
-  color: purple;
+  color: #4a148c;
   font-size: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  text-align: left; /* Alinear a la izquierda */
+  text-align: left;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
@@ -157,6 +153,9 @@ export default {
 
 label {
   display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #4a148c;
 }
 
 input[type='text'],
@@ -164,35 +163,40 @@ input[type='email'],
 textarea,
 select {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid purple; /* Bordes púrpura */
+  padding: 0.75rem;
+  border: 1px solid #4a148c;
   border-radius: 0.25rem;
   box-sizing: border-box;
-  background-color: #f3e5f5; /* Fondo lila */
+  background-color: #f3e5f5;
 }
 
 textarea {
-  resize: vertical; /* Permitir redimensionar verticalmente */
+  resize: vertical;
 }
 
 button {
   cursor: pointer;
-  background-color: #d1c4e9; /* Botón lila claro */
+  background-color: #7b1fa2;
   border: none;
-  color: white; /* Texto blanco */
-  padding: 0.3rem;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
 }
 
 button.btn-primary {
-  background-color: #771daf; /* Botón púrpura oscuro */
-  border-color: #d1c4e9;
-  color: white;
+  background-color: #6a1b9a;
+}
+
+button:hover {
+  background-color: #4a148c;
 }
 
 .separator {
   width: 100%;
-  height: 0.1cm;
-  background-color: #771daf;
+  height: 2px;
+  background-color: #4a148c;
   margin: 2rem 0;
 }
 
@@ -200,12 +204,14 @@ button.btn-primary {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
-.contact-info, .follow-us {
-  flex: 1 1 30%; /* Ensures each column takes up approximately one-third of the space */
-  margin-right: 1rem; /* Adds spacing between the columns */
+.contact-info,
+.follow-us {
+  flex: 1 1 45%;
 }
 
 .contact-info-item {
@@ -213,53 +219,65 @@ button.btn-primary {
 }
 
 .contact-label {
-  color: purple;
-  font-size: 1.5rem;
+  color: #4a148c;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .contact-detail {
-  color: purple;
-  font-size: 1.2rem;
+  color: #4a148c;
+  font-size: 1rem;
 }
 
 .contact-detail a {
-  color: purple;
+  color: #4a148c;
   text-decoration: none;
 }
 
 .icon {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   vertical-align: middle;
   margin-right: 0.5rem;
 }
 
 .follow-label {
-  color: purple;
-  font-size: 1.5rem;
+  color: #4a148c;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .social-icons {
   display: flex;
-  justify-content: center;
   gap: 1rem;
 }
 
 .social-icon {
-  color: purple;
+  color: #4a148c;
   font-size: 2rem;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
-.contact-info:not(:last-child),
-.follow-us:not(:last-child) {
-  margin-right: 2rem; /* Add spacing between the columns */
+
+.social-icon:hover {
+  color: #7b1fa2;
 }
-/* Estilos para el mensaje de éxito */
+
 .success-message {
   text-align: center;
-  color: #771daf;
+  color: #4a148c;
   font-size: 1.2rem;
   margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    flex-direction: column;
+  }
+
+  .contact-info,
+  .follow-us {
+    flex: 1 1 100%;
+    margin-right: 0;
+  }
 }
 </style>

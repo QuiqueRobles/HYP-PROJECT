@@ -2,7 +2,7 @@
   <div class="call-to-action">
     <h2>Seek Support Now</h2>
     <p>If you or someone you know needs help, don't hesitate to reach out.</p>
-    <button><nuxt-link class="navbar-item" to="/contact">Contact Us</nuxt-link></button>
+    <router-link to="/contact" class="cta-button">Contact Us</router-link>
   </div>
 </template>
 
@@ -42,6 +42,20 @@ export default {
 }
 
 .call-to-action button:hover {
+  background-color: #550099;
+}
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #6a0dad;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-size: 1.2rem;
+}
+
+.cta-button:hover {
   background-color: #550099;
 }
 </style>
