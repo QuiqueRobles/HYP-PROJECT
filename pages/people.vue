@@ -1,19 +1,28 @@
 <template>
   <PeopleIntroduction />
   <div class="people-list">
-    <h1>People List</h1>
+    <div class="list-header">
+      <h1>People List</h1>
+      <div class="search-container">
+        <input 
+          v-model="searchQuery" 
+          type="text" 
+          class="search-bar" 
+          placeholder="Search by name or ID"
+        />
+        <i class="search-icon">🔍</i> <!-- Puedes usar un icono mejor como FontAwesome -->
+      </div>
+    </div>
     <ul>
-      <li v-for="person in people" :key="person.id" :id="`person-${person.id}`" class="person-card">
+      <li v-for="person in filteredPeople" :key="person.id" :id="`person-${person.id}`" class="person-card">
         <img :src="person.picture_url" :alt="person.name" class="person-avatar" />
         <div class="person-details">
           <h2>{{ person.name }}</h2>
           <p>{{ person.cv }}</p>
-
-          <div v-if="getServices(person.id).length || getProjects(person.id).length"> 
+          <div v-if="getServices(person.id).length || getProjects(person.id).length">
             <h3>Responsibilities</h3>
             <ul v-if="getServices(person.id).length">
               <li v-for="service in getServices(person.id)" :key="service.id">
-                
                 <nuxt-link class="link-item" :to="{ path: `/service${service.id}`, query: { serviceId: service.id } }">{{ service.title }}</nuxt-link>
               </li>
             </ul>
@@ -30,33 +39,46 @@
 </template>
 
 <script setup>
-
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { usePeopleStore } from '~/stores/people';
 import { useServicesStore } from '~/stores/services';
 import { useProjectsStore } from '~/stores/projects';
 import PeopleIntroduction from '@/components/PeopleIntroduction.vue';
 
-const store = usePeopleStore();
+const peopleStore = usePeopleStore();
 const servicesStore = useServicesStore();
 const projectsStore = useProjectsStore();
-const people = store.people;
+const loading = ref(true);
+const searchQuery = ref('');
 
+onMounted(async () => {
+  try {
+    await peopleStore.fetchPeople();
+    await servicesStore.fetchServices();
+    await projectsStore.fetchProjects();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    loading.value = false;
+  }
+});
 
-const newPerson = ref({ name: '', picture_url: '', cv: '' });
-function addNewPerson() {
-  store.addPerson({ ...newPerson.value });
-  newPerson.value = { name: '', picture_url: '', cv: '' };
-}
+const people = computed(() => peopleStore.people);
 
-function getServices(personId) {
+const getServices = (personId) => {
   return servicesStore.services.filter(service => service.responsible_person_id === personId);
-}
+};
 
-function getProjects(personId) {
+const getProjects = (personId) => {
   return projectsStore.projects.filter(project => project.responsible_person_id === personId);
-}
+};
 
+const filteredPeople = computed(() => {
+  return people.value.filter(person =>
+    person.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    person.id.toString().includes(searchQuery.value)
+  );
+});
 </script>
 
 <style scoped>
@@ -69,11 +91,38 @@ function getProjects(personId) {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 h1 {
   font-size: 2em;
   color: #4a148c;
-  text-align: center;
-  margin-bottom: 20px;
+}
+
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  padding-right: 30px; /* Espacio para el icono */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Para que no interfiera con la entrada */
 }
 
 .person-card {
@@ -133,32 +182,4 @@ ul {
 .link-item:hover {
   color: #0056b3;
 }
-
-.add-person {
-  margin-top: 40px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.add-person-form {
-  display: grid;
-  grid-gap: 15px;
-}
-.input-field {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-}
-.submit-button {
-  padding: 10px 20px;
-  background-color: #4a148c;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
 </style>
