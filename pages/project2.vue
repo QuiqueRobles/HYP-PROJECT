@@ -12,14 +12,58 @@
             <br>
             <div class="responsible-person">
               <div>Responsible person:</div>
-              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`" class="responsible-image" />
+              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`"
+                class="responsible-image" />
               <div class="responsible-name">
-                <router-link class="link-item" v-if="responsiblePerson.id" :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name }}</router-link>
+                <router-link class="link-item" v-if="responsiblePerson.id"
+                  :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name
+                  }}</router-link>
                 <span v-else>{{ responsiblePerson.name }}</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="additional-info">
+        <h3>Key Features and Services</h3>
+        <ul>
+          <li><strong>Comprehensive Support:</strong> The Safe Haven Shelter provides a safe and secure environment for
+            women and children fleeing domestic violence. Services include emergency housing, meals, and personal care
+            items.</li>
+          <li><strong>24/7 Accessibility:</strong> The shelter is open 24/7, ensuring that support is available whenever
+            it is needed, including crisis intervention and counseling services.</li>
+          <li><strong>Tailored Programs:</strong> We offer personalized programs to address the unique needs of each
+            resident, including legal assistance, job training, and educational workshops.</li>
+        </ul>
+
+        <h3>Impact and Outcomes</h3>
+        <ul>
+          <li><strong>Safety and Security:</strong> Since its inception, the shelter has provided refuge to over 3000
+            women and children, ensuring their safety and well-being.</li>
+          <li><strong>Empowerment:</strong> Through various empowerment programs, 70% of residents have successfully
+            transitioned to independent living.</li>
+          <li><strong>Community Integration:</strong> Over 200 women have been reintegrated into the community with
+            stable jobs and housing, thanks to the comprehensive support provided.</li>
+        </ul>
+
+        <h3>Success Stories</h3>
+        <ul>
+          <li><strong>New Beginnings:</strong> One resident, Sarah Johnson, escaped an abusive relationship and, with
+            the help of the shelter, secured a job and an apartment, providing a stable environment for her children.
+          </li>
+          <li><strong>From Fear to Confidence:</strong> Another resident, Emily Brown, attended our job training
+            programs and is now employed as a manager in a local business.</li>
+        </ul>
+
+        <h3>Future Initiatives</h3>
+        <ul>
+          <li><strong>Expansion Plans:</strong> We plan to expand our facilities to accommodate more residents and offer
+            additional services such as child care and health care.</li>
+          <li><strong>Community Outreach:</strong> Launching awareness campaigns to educate the community about domestic
+            violence and the resources available at the shelter.</li>
+          <li><strong>Volunteer Engagement:</strong> Developing a volunteer program to involve more community members in
+            supporting the shelter's operations and programs.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -87,15 +131,20 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  border: 2px solid #6a0dad; /* Borde morado */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 1rem; /* Espacio interno */
+  border: 2px solid #6a0dad;
+  /* Borde morado */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  padding: 1rem;
+  /* Espacio interno */
 }
 
 .project-image {
   width: 100%;
-  max-width: 400px; /* Tamaño máximo de la imagen */
-  max-height: 400px; /* Tamaño máximo de la imagen */
+  max-width: 400px;
+  /* Tamaño máximo de la imagen */
+  max-height: 400px;
+  /* Tamaño máximo de la imagen */
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -105,8 +154,10 @@ h2 {
 .description {
   flex: 1;
   margin-left: 2rem;
-  font-size: 0.9rem; /* Texto más pequeño */
-  text-align: justify; /* Texto justificado */
+  font-size: 0.9rem;
+  /* Texto más pequeño */
+  text-align: justify;
+  /* Texto justificado */
 }
 
 .separator {
@@ -133,7 +184,7 @@ h2 {
 }
 
 .responsible-name {
-  margin-right: 1rem;   
+  margin-right: 1rem;
 }
 
 .responsible-image {
@@ -142,10 +193,24 @@ h2 {
   border-radius: 50%;
 }
 
+.additional-info {
+  margin-top: 2rem;
+}
+
+h3 {
+  color: #6a0dad;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
 p {
-  font-size: 0.9rem; /* Texto más pequeño */
+  font-size: 0.9rem;
   color: #333;
-  text-align: justify; /* Texto justificado */
+  text-align: justify;
 }
 
 .link-item {

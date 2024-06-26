@@ -12,14 +12,55 @@
             <br>
             <div class="responsible-person">
               <div>Responsible person:</div>
-              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`" class="responsible-image" />
+              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`"
+                class="responsible-image" />
               <div class="responsible-name">
-                <router-link class="link-item" v-if="responsiblePerson.id" :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name }}</router-link>
+                <router-link class="link-item" v-if="responsiblePerson.id"
+                  :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name
+                  }}</router-link>
                 <span v-else>{{ responsiblePerson.name }}</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="additional-info">
+        <h3>Key Activities and Achievements</h3>
+        <ul>
+          <li><strong>Workshops and Training:</strong> Conducted over 50 workshops focusing on skills development,
+            financial literacy, and leadership.</li>
+          <li><strong>Community Outreach:</strong> Engaged with more than 5000 women through various community outreach
+            programs.</li>
+          <li><strong>Partnerships:</strong> Established collaborations with local businesses, NGOs, and government
+            agencies to create job opportunities and support networks.</li>
+        </ul>
+
+        <h3>Program Impact</h3>
+        <ul>
+          <li><strong>Employment:</strong> Successfully helped 1000 women secure employment in various sectors.</li>
+          <li><strong>Entrepreneurship:</strong> Supported 200 women in starting their own businesses with mentorship
+            and financial aid.</li>
+          <li><strong>Education:</strong> Facilitated educational programs that benefited over 1500 women, enhancing
+            their skills and knowledge.</li>
+        </ul>
+
+        <h3>Success Stories</h3>
+        <ul>
+          <li><strong>Transformative Journey:</strong> One participant, Jane Doe, leveraged the training programs to
+            launch a successful catering business.</li>
+          <li><strong>Breaking Barriers:</strong> Maria Smith, another participant, secured a managerial position in a
+            local firm after completing our leadership workshop.</li>
+        </ul>
+
+        <h3>Future Plans</h3>
+        <ul>
+          <li><strong>Expansion:</strong> Plan to extend the program to rural areas to reach more women in need of
+            support.</li>
+          <li><strong>New Initiatives:</strong> Introduce digital literacy programs to help women navigate and leverage
+            online platforms for business and learning.</li>
+          <li><strong>Volunteer Program:</strong> Launch a volunteer program to engage community members in supporting
+            the empowerment initiatives.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -27,9 +68,6 @@
     <p>Loading...</p>
   </div>
 </template>
-
-
-
 
 <script>
 import { ref, computed, onMounted } from 'vue';
@@ -90,15 +128,15 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  border: 2px solid #6a0dad; /* Borde morado */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 1rem; /* Espacio interno */
+  border: 2px solid #6a0dad;
+  border-radius: 8px;
+  padding: 1rem;
 }
 
 .project-image {
   width: 100%;
-  max-width: 400px; /* Tamaño máximo de la imagen */
-  max-height: 400px; /* Tamaño máximo de la imagen */
+  max-width: 400px;
+  max-height: 400px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -108,8 +146,8 @@ h2 {
 .description {
   flex: 1;
   margin-left: 2rem;
-  font-size: 0.9rem; /* Texto más pequeño */
-  text-align: justify; /* Texto justificado */
+  font-size: 0.9rem;
+  text-align: justify;
 }
 
 .separator {
@@ -136,7 +174,7 @@ h2 {
 }
 
 .responsible-name {
-  margin-right: 1rem;   
+  margin-right: 1rem;
 }
 
 .responsible-image {
@@ -145,10 +183,24 @@ h2 {
   border-radius: 50%;
 }
 
+.additional-info {
+  margin-top: 2rem;
+}
+
+h3 {
+  color: #6a0dad;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
 p {
-  font-size: 0.9rem; /* Texto más pequeño */
+  font-size: 0.9rem;
   color: #333;
-  text-align: justify; /* Texto justificado */
+  text-align: justify;
 }
 
 .link-item {

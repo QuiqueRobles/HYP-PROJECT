@@ -12,14 +12,56 @@
             <br>
             <div class="responsible-person">
               <div>Responsible person:</div>
-              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`" class="responsible-image" />
+              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`"
+                class="responsible-image" />
               <div class="responsible-name">
-                <router-link class="link-item" v-if="responsiblePerson.id" :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name }}</router-link>
+                <router-link class="link-item" v-if="responsiblePerson.id"
+                  :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name
+                  }}</router-link>
                 <span v-else>{{ responsiblePerson.name }}</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="additional-info">
+        <h3>Program Highlights</h3>
+        <ul>
+          <li><strong>Individual Counseling:</strong> Offers one-on-one counseling sessions to help women deal with
+            trauma, stress, and mental health issues.</li>
+          <li><strong>Support Groups:</strong> Facilitates group sessions where women can share experiences and support
+            each other in a safe environment.</li>
+          <li><strong>Workshops and Seminars:</strong> Conducts educational workshops on mental health awareness, stress
+            management, and coping strategies.</li>
+        </ul>
+
+        <h3>Impact and Success</h3>
+        <ul>
+          <li><strong>Lives Impacted:</strong> Over 2000 women have received counseling and support through our
+            services, leading to improved mental health and well-being.</li>
+          <li><strong>Community Engagement:</strong> Engaged with the community through 150 workshops and seminars,
+            raising awareness about mental health issues.</li>
+          <li><strong>Holistic Support:</strong> Provided comprehensive support, including referrals to additional
+            resources and services, to ensure holistic care for all clients.</li>
+        </ul>
+
+        <h3>Testimonials</h3>
+        <ul>
+          <li><strong>Healing Journey:</strong> "The counseling sessions helped me regain my confidence and find a new
+            purpose in life," says Mary Johnson, a program beneficiary.</li>
+          <li><strong>Community Support:</strong> "The support group was a lifeline for me. I found friends and allies
+            who understood what I was going through," shares Lisa Martinez.</li>
+        </ul>
+
+        <h3>Future Goals</h3>
+        <ul>
+          <li><strong>Expansion of Services:</strong> Plans to extend counseling services to more rural areas, ensuring
+            that all women have access to mental health support.</li>
+          <li><strong>Digital Counseling:</strong> Introducing online counseling sessions to make support accessible to
+            women who cannot attend in person.</li>
+          <li><strong>Volunteer Program:</strong> Launching a volunteer program to train community members as peer
+            counselors, expanding our reach and impact.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -87,15 +129,20 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  border: 2px solid #6a0dad; /* Borde morado */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 1rem; /* Espacio interno */
+  border: 2px solid #6a0dad;
+  /* Borde morado */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  padding: 1rem;
+  /* Espacio interno */
 }
 
 .project-image {
   width: 100%;
-  max-width: 400px; /* Tamaño máximo de la imagen */
-  max-height: 400px; /* Tamaño máximo de la imagen */
+  max-width: 400px;
+  /* Tamaño máximo de la imagen */
+  max-height: 400px;
+  /* Tamaño máximo de la imagen */
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -105,8 +152,10 @@ h2 {
 .description {
   flex: 1;
   margin-left: 2rem;
-  font-size: 0.9rem; /* Texto más pequeño */
-  text-align: justify; /* Texto justificado */
+  font-size: 0.9rem;
+  /* Texto más pequeño */
+  text-align: justify;
+  /* Texto justificado */
 }
 
 .separator {
@@ -133,7 +182,7 @@ h2 {
 }
 
 .responsible-name {
-  margin-right: 1rem;   
+  margin-right: 1rem;
 }
 
 .responsible-image {
@@ -142,10 +191,24 @@ h2 {
   border-radius: 50%;
 }
 
+.additional-info {
+  margin-top: 2rem;
+}
+
+h3 {
+  color: #6a0dad;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
 p {
-  font-size: 0.9rem; /* Texto más pequeño */
+  font-size: 0.9rem;
   color: #333;
-  text-align: justify; /* Texto justificado */
+  text-align: justify;
 }
 
 .link-item {
