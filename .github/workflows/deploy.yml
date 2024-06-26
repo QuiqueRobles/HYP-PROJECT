@@ -16,7 +16,7 @@ jobs:
       - run: npm install
       # Inyectar el secreto en el entorno de build
       - run: echo "NUXT_PUBLIC_OPENAI_API_KEY=${{ secrets.OPEN_AI_KEY }}" >> .env
-      - run: NUXT_APP_BASE_URL=/HYP-PROJECT npx nuxt build --preset github_pages
+      - run: NUXT_APP_BASE_URL=/HYP-PROJECT npx nuxt generate --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
