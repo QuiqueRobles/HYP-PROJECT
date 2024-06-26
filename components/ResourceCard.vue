@@ -1,12 +1,11 @@
 <template>
 
   <div class="resource-card">
-    <router-link :to="resource.projectLink">
-      <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">   
-      <div class="resource-details">
-          <h3>{{ resource.title }}</h3>
-      </div> 
-    </router-link>
+    <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
+    <div class="resource-details">
+      <h3>{{ resource.title }}</h3>
+      <p>{{ resource.description }}</p>
+    </div>
 
     <div class="responsible-details">
       <br>
