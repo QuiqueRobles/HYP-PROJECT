@@ -6,19 +6,11 @@
       <h3>{{ resource.title }}</h3>
       <p>{{ resource.description }}</p>
     </div>
-    
-    <div class="responsible-details">
-      <br>
-      <hr>
-      <p>Responsible person:</p>
-      <div class="responsible-person">
-        <img :src="resource.responsible_image" :alt="`Image of ${resource.responsible}`" class="responsible-image" />
-        <div class="responsible-name">
-          <a v-if="resource.responsibleId" :href="`/people#person-${resource.responsibleId}`" class="link-item">{{ resource.responsible }}</a>
-          <span v-else>{{ resource.responsible }}</span>
-        </div>
-      </div>
+
+    <div class="more-info">
+      <router-link :to="resource.projectUrl" class="more-info-button">Learn More</router-link>
     </div>
+
   </div>
 </template>
 
@@ -133,6 +125,23 @@ p {
 
 .project-title:hover {
   text-decoration: underline;
+}
+
+.more-info {
+  margin-top: 1rem;
+}
+
+.more-info-button {
+  background-color: #6a0dad;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.more-info-button:hover {
+  background-color: #5a00b3;
 }
 
 @media (max-width: 600px) {
