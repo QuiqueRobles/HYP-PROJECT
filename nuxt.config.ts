@@ -36,8 +36,13 @@ export default defineNuxtConfig({
         '/HYP-PROJECT/project2',
         '/HYP-PROJECT/project3',
         '/HYP-PROJECT/project4',
-        '/HYP-PROJECT/project5' // Ejemplo de ruta dinámica, ajusta según tus necesidades
+        '/HYP-PROJECT/project5', // Ejemplo de ruta dinámica, ajusta según tus necesidades
         // Agrega aquí otras rutas dinámicas necesarias
+        '/HYP-PROJECT/service1',
+        '/HYP-PROJECT/service2',
+        '/HYP-PROJECT/service3',
+        '/HYP-PROJECT/service4',
+        '/HYP-PROJECT/service5'
       ]
     }
   }

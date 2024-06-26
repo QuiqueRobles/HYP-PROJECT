@@ -1,12 +1,12 @@
 <template>
   <div v-if="resource" class="resource-card">
-    <a :href="`/HYP-PROJECT/${resource.projectLink}`" class="resource-link">
-      <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
-      <div class="resource-details">
-        <h3>{{ resource.title }}</h3>
-        <p>{{ resource.description }}</p>
-      </div>
-    </a>
+
+    <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
+    <div class="resource-details">
+      <h3>{{ resource.title }}</h3>
+      <p>{{ resource.description }}</p>
+    </div>
+    
     <div class="responsible-details">
       <br>
       <hr>
