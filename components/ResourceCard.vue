@@ -4,7 +4,8 @@
     <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
     <div class="resource-details">
       <h3>{{ resource.title }}</h3>
-      <p>{{ resource.description }}</p>
+      <br>
+      <p class="resource-description">{{ resource.description }}</p>
     </div>
 
     <div class="responsible-details">
@@ -71,8 +72,8 @@ export default {
 }
 
 .resource-image {
-  width: 100%;
-  max-height: 300px;
+  width: 300;
+  max-height: 200px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -80,6 +81,10 @@ export default {
 
 .resource-details {
   flex: 1;
+}
+
+.resource-description {
+  text-align: justify;
 }
 
 .responsible-details {

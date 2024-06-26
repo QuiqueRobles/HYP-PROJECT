@@ -3,23 +3,33 @@
     <div class="container">
       <h2>{{ project.title }}</h2>
       <div class="content">
-        <img :src="project.picture_url" :alt="`Image of ${project.title}`" class="project-image">
+        <img
+          :src="project.picture_url"
+          :alt="`Image of ${project.title}`"
+          class="project-image"
+        />
         <div class="description">
           <p>{{ project.description }}</p>
-          <br>
-          <hr>
+          <hr class="separator" />
           <div class="responsible-details">
-            <br>
             <div class="responsible-person">
-              <div>Responsible person:</div>
-              <img :src="responsiblePerson.picture_url" :alt="`Image of ${responsiblePerson.name}`"
-                class="responsible-image" />
-              <div class="responsible-name">
-                <router-link class="link-item" v-if="responsiblePerson.id"
-                  :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }">{{ responsiblePerson.name
-                  }}</router-link>
-                <span v-else>{{ responsiblePerson.name }}</span>
+              <div>
+                <span class="responsible-label">Responsible person:</span>
+                <span class="responsible-name">
+                  <router-link
+                    class="link-item"
+                    v-if="responsiblePerson.id"
+                    :to="{ path: '/people', hash: `#person-${responsiblePerson.id}` }"
+                    >{{ responsiblePerson.name }}</router-link
+                  >
+                  <span v-else>{{ responsiblePerson.name }}</span>
+                </span>
               </div>
+              <img
+                :src="responsiblePerson.picture_url"
+                :alt="`Image of ${responsiblePerson.name}`"
+                class="responsible-image"
+              />
             </div>
           </div>
         </div>
@@ -113,13 +123,13 @@ export default {
 <style scoped>
 .container {
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 900px;
   margin: auto;
 }
 
 h2 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
   color: #6a0dad;
   text-align: center;
 }
@@ -131,13 +141,19 @@ h2 {
   align-items: flex-start;
   border: 2px solid #6a0dad;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 0 20px rgba(106, 13, 173, 0.9);
+}
+
+.content:hover {
+  box-shadow: 0 0 50px rgba(106, 13, 173, 0.9);
 }
 
 .project-image {
   width: 100%;
   max-width: 400px;
-  max-height: 400px;
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -147,7 +163,7 @@ h2 {
 .description {
   flex: 1;
   margin-left: 2rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: justify;
 }
 
@@ -168,24 +184,27 @@ h2 {
 }
 
 .responsible-person {
-  font-size: 1.1rem;
+  font-size: 1rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-top: 0.5rem;
 }
 
 .responsible-name {
-  margin-right: 1rem;
+  margin-left: 0.5rem;
 }
 
 .responsible-image {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  margin-top: 0.5rem;
 }
 
 .additional-info {
   margin-top: 2rem;
+  font-size: 1rem;
 }
 
 h3 {
@@ -199,7 +218,7 @@ ul {
 }
 
 p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #333;
   text-align: justify;
 }
