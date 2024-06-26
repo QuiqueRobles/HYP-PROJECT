@@ -8,7 +8,7 @@
     </div>
 
     <div class="more-info">
-      <router-link :to="resource.projectUrl" class="more-info-button">Learn More</router-link>
+      <a :href="`/project${resource.id}`">Learn More</a>
     </div>
 
   </div>

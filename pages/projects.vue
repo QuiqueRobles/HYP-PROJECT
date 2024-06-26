@@ -62,7 +62,7 @@ export default {
         responsible_image: responsiblePerson ? responsiblePerson.picture_url : '',
         responsible: responsiblePerson ? responsiblePerson.name : 'Unknown',
         responsibleId: responsiblePerson ? responsiblePerson.id : null,
-        projectLink: `/project${project.id}`
+        id: project.id
       };
     }));
 
