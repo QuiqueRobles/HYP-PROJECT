@@ -28,7 +28,18 @@ export default defineNuxtConfig({
     ]
   },
   nitro: {
-    preset: 'github-pages'
+    preset: 'github-pages',
+    prerender: {
+      routes: [
+        '/', // Agrega las rutas que deban ser prerenderizadas
+        '/HYP-PROJECT/project1',
+        '/HYP-PROJECT/project2',
+        '/HYP-PROJECT/project3',
+        '/HYP-PROJECT/project4',
+        '/HYP-PROJECT/project5' // Ejemplo de ruta dinámica, ajusta según tus necesidades
+        // Agrega aquí otras rutas dinámicas necesarias
+      ]
+    }
   }
   ,runtimeConfig: {
     public: {
