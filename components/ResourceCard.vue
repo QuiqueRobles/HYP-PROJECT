@@ -6,7 +6,7 @@
       <h3>{{ resource.title }}</h3>
       <p>{{ resource.description }}</p>
     </div>
-    
+
     <div class="responsible-details">
       <br>
       <hr>
@@ -22,7 +22,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   props: {
@@ -37,7 +36,6 @@ export default {
 <style scoped>
 /* Tu CSS aquí */
 </style>
-
 
 <style scoped>
 @keyframes neon-border {
@@ -153,3 +151,4 @@ p {
   }
 }
 </style>
+
