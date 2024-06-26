@@ -1,13 +1,12 @@
 <template>
-
-  <div class="resource-card">
+  <div v-if="resource" class="resource-card">
     <router-link :to="resource.projectLink">
-    <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
-    <div class="resource-details">
-      <h3>{{ resource.title }}</h3>
-      <p>{{ resource.description }}</p>
-    </div>
-  </router-link>
+      <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
+      <div class="resource-details">
+        <h3>{{ resource.title }}</h3>
+        <p>{{ resource.description }}</p>
+      </div>
+    </router-link>
     <div class="responsible-details">
       <br>
       <hr>
@@ -33,6 +32,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* Tu CSS aquí */
+</style>
+
 
 <style scoped>
 @keyframes neon-border {
