@@ -1,12 +1,12 @@
 <template>
   <div v-if="resource" class="resource-card">
-    <router-link :to="resource.projectLink">
+    <a :href="`/HYP-PROJECT/${resource.projectLink}`" class="resource-link">
       <img :src="resource.image" :alt="`Image of ${resource.title}`" class="resource-image">
       <div class="resource-details">
         <h3>{{ resource.title }}</h3>
         <p>{{ resource.description }}</p>
       </div>
-    </router-link>
+    </a>
     <div class="responsible-details">
       <br>
       <hr>
@@ -14,13 +14,14 @@
       <div class="responsible-person">
         <img :src="resource.responsible_image" :alt="`Image of ${resource.responsible}`" class="responsible-image" />
         <div class="responsible-name">
-          <router-link class="link-item" v-if="resource.responsibleId" :to="{ path: '/people', hash: `#person-${resource.responsibleId}` }">{{ resource.responsible }}</router-link>
+          <a v-if="resource.responsibleId" :href="`/people#person-${resource.responsibleId}`" class="link-item">{{ resource.responsible }}</a>
           <span v-else>{{ resource.responsible }}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
