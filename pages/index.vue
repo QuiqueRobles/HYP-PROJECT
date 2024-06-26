@@ -7,6 +7,16 @@
           <h1>AGAINST WOMEN'S VIOLENCE</h1>
           <p>The National Anti-violence Network run by women's organizations</p>
           <br><br>
+          <!-- New buttons section -->
+          <div class="buttons-section">
+            <router-link to="/projects" class="btn btn-projects">
+              <i class="fas fa-project-diagram"></i> Our Projects
+            </router-link>
+            <router-link to="/services" class="btn btn-services">
+              <i class="fas fa-concierge-bell"></i> Our Services
+            </router-link>
+          </div>
+          <br><br>
           <CallToAction />
         </section>
         <Valores />
@@ -80,18 +90,15 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
-/* Estilos para el contenedor principal */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Estilos para la sección de introducción */
 .intro-section {
   text-align: center;
   margin-bottom: 40px;
@@ -107,7 +114,48 @@ export default {
   color: #555;
 }
 
-/* Estilos para la sección de los centros */
+.buttons-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.btn i {
+  margin-right: 10px;
+}
+
+.btn-projects {
+  background-color: #4a148c;
+}
+
+.btn-projects:hover {
+  background-color: #7b1fa2;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-services {
+  background-color: #00796b;
+}
+
+.btn-services:hover {
+  background-color: #004d40;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 .centers-section {
   padding: 50px 20px;
   background-color: #f4f0f8;
@@ -132,7 +180,6 @@ export default {
   justify-content: center;
 }
 
-/* Estilos para los componentes internos */
 .center-card-wrapper {
   flex: 1 1 calc(33.333% - 20px);
   display: flex;
