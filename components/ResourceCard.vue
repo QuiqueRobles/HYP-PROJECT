@@ -15,7 +15,7 @@
       <div class="responsible-person">
         <img :src="resource.responsible_image" :alt="`Image of ${resource.responsible}`" class="responsible-image" />
         <div class="responsible-name">
-          <a v-if="resource.responsibleId" :href="`/people#person-${resource.responsibleId}`" class="link-item">{{ resource.responsible }}</a>
+          <a v-if="resource.responsibleId" :href="`/HYP-PROJECT/people#person-${resource.responsibleId}`" class="link-item">{{ resource.responsible }}</a>
           <span v-else>{{ resource.responsible }}</span>
         </div>
       </div>
